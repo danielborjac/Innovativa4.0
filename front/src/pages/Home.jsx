@@ -2,7 +2,6 @@
 import { motion } from "framer-motion";
 
 import { Link } from "react-router-dom";
-import bannerImg from "../assets/banner-industrial.jpg";
 import industrialImg from "../assets/industrial-team.jpg";
 import "./Home.css";
 import { fadeInUp, fadeInDown, fadeInLeft, fadeInRight, fadeInZoom, slideRotateRight, slideRotateLeft,  blurReveal, hover3D, staggerContainer, fadeItem } from "../utils/motionConfig";
@@ -13,6 +12,7 @@ import img3 from "../assets/carousel3.jpg";
 import Banner from "../components/Banner";
 import { useState } from "react";
 import Spinner from "../components/Spinner";
+import Services from "../components/Services";
 
 const Home = () => {
 
@@ -31,13 +31,13 @@ const Home = () => {
                 {/* Banner hero */}
                 <section className="home-banner">
                     <Banner onParticlesLoaded={handleParticlesLoaded}>
-                        <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">Soluciones Industriales Innovadoras</motion.h1>
+                        <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">SOLUCIONES INDUSTRIALES INNOVADORAS</motion.h1>
                         <motion.p {...fadeInDown} {...hover3D} className="banner-subtitle">Más de 20 años optimizando la eficiencia operativa y energética.</motion.p>
                     </Banner>
                 </section>
 
                 {/* Sección: Servicios principales alternados */}
-                <section className="home-services">
+                <section className="home-description">
                     <motion.div {...fadeInLeft} className="service-text">
                         <h2>Eficiencia y Tecnología</h2>
                         <p>
@@ -72,6 +72,9 @@ const Home = () => {
                         Conócenos
                         </Link>
                     </motion.div>
+                </section>
+                <section>
+                    <Services />
                 </section>
             </div>
         </>

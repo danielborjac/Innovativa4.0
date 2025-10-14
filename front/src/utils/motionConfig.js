@@ -109,3 +109,16 @@ export const softFade = {
   whileInView: { opacity: 1 },
   transition: { duration: 1.2, ease: "easeInOut" },
 };
+
+// 🔹 Parallax leve (para hover en imágenes)
+export const hoverParallax = {
+  whileHover: { scale: 1.05, y: -10 },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
+
+// 🔹 Fade out al salir
+export const fadeOut = {
+  initial: { opacity: 1 },
+  animate: { opacity: 0 },
+  transition: { duration: 0.5 },
+};

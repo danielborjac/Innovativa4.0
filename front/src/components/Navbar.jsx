@@ -6,10 +6,12 @@ import "./Navbar.css";
 const Navbar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false); // para desplegar servicios
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setMenuOpen(false); // cerrar menú al cambiar de página
+    setMenuOpen(false);
+    setServicesOpen(false);
   }, [location]);
 
   return (
@@ -17,7 +19,9 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="navbar-logo">
           <FaIndustry className="navbar-icon" />
-          <h1>INNOVATIVA 4.0</h1>
+          <Link to="/">
+            <h1>INNOVATIVA 4.0</h1>
+          </Link>
         </div>
 
         {/* Botón hamburguesa */}
@@ -28,9 +32,30 @@ const Navbar = () => {
         <nav className={`navbar-links ${menuOpen ? "open" : ""}`}>
           <Link to="/" className="nav-item">Inicio</Link>
           <Link to="/nosotros" className="nav-item">Nosotros</Link>
-          <Link to="/servicios" className="nav-item">Servicios</Link>
-          <Link to="/contacto" className="nav-item">Contacto</Link>
 
+          {/* Menú desplegable de Servicios */}
+          <div
+            className={`nav-item dropdown ${servicesOpen ? "active" : ""}`}
+            onMouseEnter={() => window.innerWidth > 900 && setServicesOpen(true)}
+            onMouseLeave={() => window.innerWidth > 900 && setServicesOpen(false)}
+            onClick={() => window.innerWidth <= 900 && setServicesOpen(!servicesOpen)}
+          >
+            <span className="dropdown-title">Servicios ▾</span>
+
+            <div className={`dropdown-menu ${servicesOpen ? "show" : ""}`}>
+              <Link to="/servicios/ingenieria-electrica" className="dropdown-link">
+                Ingeniería Eléctrica y Electrónica
+              </Link>
+              <Link to="/servicios/ingenieria-industrial" className="dropdown-link">
+                Ingeniería Industrial
+              </Link>
+              <Link to="/servicios/capacitaciones" className="dropdown-link">
+                Capacitaciones y Entrenamientos
+              </Link>
+            </div>
+          </div>
+
+          <Link to="/contacto" className="nav-item">Contacto</Link>
         </nav>
       </div>
     </header>

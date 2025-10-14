@@ -12,7 +12,7 @@ const About = () => {
       {/* Banner */}
       <section className="about-banner">
         <img src={aboutBanner} alt="Equipo Innovativa" />
-        <motion.h1 {...fadeInUp}>Sobre Nosotros</motion.h1>
+        <motion.h1 {...fadeInUp}>SOBRE NOSOTROS</motion.h1>
       </section>
 
       {/* Sección: Texto + imagen alternada */}

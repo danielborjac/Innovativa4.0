@@ -1,0 +1,206 @@
+.services-section {
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.services-slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.services-title {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 3;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.service-card {
+  position: relative;
+  flex: 1;
+  cursor: pointer;
+  overflow: hidden;
+  transition: flex 0.8s ease;
+}
+
+.service-card:hover {
+  flex: 2.5;
+}
+
+.service-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1s ease, filter 0.8s ease;
+}
+
+.service-card:hover .service-bg {
+  transform: scale(1.2);
+  filter: brightness(1.1);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  transition: background 0.8s ease;
+}
+
+.service-card:hover .overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* contenido del servicio */
+.service-content {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+  color: #fff;
+  transition: all 0.8s ease;
+  transform: translateY(50%);
+  text-align: left;
+}
+
+.service-card:hover .service-content {
+  transform: translateY(0);
+  bottom: 30%;
+}
+
+/* título siempre visible */
+.service-content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-align: left;
+  opacity: 1;
+}
+
+/* descripción oculta inicialmente en escritorio */
+.service-content p {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.service-card:hover .service-content p {
+  opacity: 1;
+}
+
+/* botón */
+.learn-more {
+  display: inline-block;
+  background-color: #ffb400;
+  color: #000;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.service-card:hover .learn-more {
+  opacity: 1;
+}
+
+.learn-more:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* ======== Responsivo ======== */
+@media (max-width: 1024px) {
+  .services-section {
+    height: auto;
+  }
+
+  .services-slider {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .services-title {
+    position: static;
+    transform: none;
+    margin: 2rem 0 1rem;
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .service-card {
+    flex: none;
+    width: 100%;
+    height: 60vh;
+  }
+
+  .service-bg {
+    transform: scale(1.2);
+  }
+
+  /* mostrar descripción y botón siempre */
+  .service-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+  }
+
+  .service-content p,
+  .learn-more {
+    opacity: 1 !important;
+  }
+
+  .service-card:hover {
+    flex: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .services-title {
+    font-size: 1.8rem;
+  }
+
+  .service-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .service-content p {
+    font-size: 0.9rem;
+  }
+
+  .learn-more {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+}
