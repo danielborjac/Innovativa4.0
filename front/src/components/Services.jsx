@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import "./services.css";
+import "./Services.css";
 
 import electricImg from "../assets/electrical.jpg";
 import industrialImg from "../assets/industrial.jpg";
