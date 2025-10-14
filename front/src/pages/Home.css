@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: radial-gradient(circle,rgb(42, 66, 102) 0%, rgb(13, 32, 58) 100%);
 }
 
 .banner-img {
@@ -123,9 +124,7 @@
   .banner-subtitle {
     font-size: 1.1rem;
   }
-  .home-banner {
-    height: 40vh;
-  }
+
 }
 
 .service-carousel {

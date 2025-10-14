@@ -155,4 +155,7 @@
   .items-grid {
     grid-template-columns: 1fr;
   }
+  .service-main {
+  gap: 1rem;
+}
 }

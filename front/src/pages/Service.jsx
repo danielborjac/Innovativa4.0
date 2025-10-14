@@ -156,92 +156,95 @@ const Service = () => {
   const service = servicesContent[serviceId];
 
   useEffect(() => {
-    let mounted = true;
-    const imgs = Array.from(document.querySelectorAll(".section-img"));
+    if (window.innerWidth > 900) { // no aplica para movil
+      console.log("xd");
+      let mounted = true;
+      const imgs = Array.from(document.querySelectorAll(".section-img"));
 
-    const syncHeights = () => {
-      // delay por RAF para asegurar reflow completo
-      window.requestAnimationFrame(() => {
-        const sections = document.querySelectorAll(".service-section");
-        sections.forEach((sec) => {
-          const text = sec.querySelector(".section-text");
-          const imgWrapper = sec.querySelector(".section-img-wrapper");
-          if (!text || !imgWrapper) return;
+      const syncHeights = () => {
+        // delay por RAF para asegurar reflow completo
+        window.requestAnimationFrame(() => {
+          const sections = document.querySelectorAll(".service-section");
+          sections.forEach((sec) => {
+            const text = sec.querySelector(".section-text");
+            const imgWrapper = sec.querySelector(".section-img-wrapper");
+            if (!text || !imgWrapper) return;
 
-          // altura real del contenido de texto (incluye padding/margins internos)
-          const textHeight = Math.ceil(text.getBoundingClientRect().height + 32);
+            // altura real del contenido de texto (incluye padding/margins internos)
+            const textHeight = Math.ceil(text.getBoundingClientRect().height + 32);
 
-          // mínimo para evitar wrappers demasiado pequeños
-          const minH = 380;
+            // mínimo para evitar wrappers demasiado pequeños
+            const minH = 380;
 
-          // opcional padding visual extra
-          const paddingExtra = 0; // puedes poner 12 o 16 si quieres más separación
-          const desired = Math.max(textHeight + paddingExtra, minH);
+            // opcional padding visual extra
+            const paddingExtra = 0; // puedes poner 12 o 16 si quieres más separación
+            const desired = Math.max(textHeight + paddingExtra, minH);
 
-          // solo actualizar si cambió (evita reflows innecesarios)
-          const current = parseInt(imgWrapper.style.height || 0, 10);
-          if (!current || Math.abs(current - desired) > 2) {
-            imgWrapper.style.height = `${desired}px`;
-          }
+            // solo actualizar si cambió (evita reflows innecesarios)
+            const current = parseInt(imgWrapper.style.height || 0, 10);
+            if (!current || Math.abs(current - desired) > 2) {
+              imgWrapper.style.height = `${desired}px`;
+            }
+          });
         });
+      };
+
+      // Ejecutar inicialmente
+      syncHeights();
+
+      // Ejecutar otra vez cuando *todas* las imágenes hayan cargado
+      const handleAllLoaded = () => {
+        // pequeña espera adicional para garantizar layout final
+        setTimeout(() => { if (mounted) syncHeights(); }, 60);
+      };
+
+      // Si alguna imagen no está lista, agregamos listener; si todas ya listas, ejecutamos
+      const notLoaded = imgs.filter(img => !img.complete);
+      if (notLoaded.length > 0) {
+        let remaining = notLoaded.length;
+        notLoaded.forEach(img => {
+          const onLoad = () => {
+            remaining--;
+            img.removeEventListener("load", onLoad);
+            if (remaining === 0) handleAllLoaded();
+          };
+          img.addEventListener("load", onLoad);
+          // también captura error para no colgar
+          const onErr = () => {
+            remaining--;
+            img.removeEventListener("error", onErr);
+            if (remaining === 0) handleAllLoaded();
+          };
+          img.addEventListener("error", onErr);
+        });
+      } else {
+        // todas cargadas ya
+        handleAllLoaded();
+      }
+
+      // volver a calcular al cambiar tamaño
+      const onResize = () => syncHeights();
+      window.addEventListener("resize", onResize);
+
+      // opcional: si tu contenido puede cambiar dinámicamente (p.e. agregar items),
+      // puedes observar mutaciones en cada section-text -> recalc.
+      const observers = [];
+      document.querySelectorAll(".section-text").forEach(node => {
+        const mo = new MutationObserver(syncHeights);
+        mo.observe(node, { childList: true, subtree: true, characterData: true });
+        observers.push(mo);
       });
-    };
 
-    // Ejecutar inicialmente
-    syncHeights();
-
-    // Ejecutar otra vez cuando *todas* las imágenes hayan cargado
-    const handleAllLoaded = () => {
-      // pequeña espera adicional para garantizar layout final
-      setTimeout(() => { if (mounted) syncHeights(); }, 60);
-    };
-
-    // Si alguna imagen no está lista, agregamos listener; si todas ya listas, ejecutamos
-    const notLoaded = imgs.filter(img => !img.complete);
-    if (notLoaded.length > 0) {
-      let remaining = notLoaded.length;
-      notLoaded.forEach(img => {
-        const onLoad = () => {
-          remaining--;
-          img.removeEventListener("load", onLoad);
-          if (remaining === 0) handleAllLoaded();
-        };
-        img.addEventListener("load", onLoad);
-        // también captura error para no colgar
-        const onErr = () => {
-          remaining--;
-          img.removeEventListener("error", onErr);
-          if (remaining === 0) handleAllLoaded();
-        };
-        img.addEventListener("error", onErr);
-      });
-    } else {
-      // todas cargadas ya
-      handleAllLoaded();
+      return () => {
+        mounted = false;
+        window.removeEventListener("resize", onResize);
+        observers.forEach(o => o.disconnect());
+        // quitamos listeners de imágenes por seguridad (no imprescindible aquí)
+        imgs.forEach(img => {
+          img.removeEventListener && img.removeEventListener("load", syncHeights);
+        });
+      };
     }
-
-    // volver a calcular al cambiar tamaño
-    const onResize = () => syncHeights();
-    window.addEventListener("resize", onResize);
-
-    // opcional: si tu contenido puede cambiar dinámicamente (p.e. agregar items),
-    // puedes observar mutaciones en cada section-text -> recalc.
-    const observers = [];
-    document.querySelectorAll(".section-text").forEach(node => {
-      const mo = new MutationObserver(syncHeights);
-      mo.observe(node, { childList: true, subtree: true, characterData: true });
-      observers.push(mo);
-    });
-
-    return () => {
-      mounted = false;
-      window.removeEventListener("resize", onResize);
-      observers.forEach(o => o.disconnect());
-      // quitamos listeners de imágenes por seguridad (no imprescindible aquí)
-      imgs.forEach(img => {
-        img.removeEventListener && img.removeEventListener("load", syncHeights);
-      });
-    };
   }, [service]); // recalcula cuando cambie el servicio
 
 
@@ -258,6 +261,7 @@ const Service = () => {
       {/* Contenido */}
       <div className="service-main">
         {service.sections.map((sec, idx) => {
+          const isMobile= window.innerWidth < 768
           const isReverse = idx % 2 !== 0;
 
           // Render order control: if reverse, text first then image (or opposite)
@@ -305,17 +309,17 @@ const Service = () => {
           return (
             <section
               key={idx}
-              className={`service-section ${isReverse ? "reverse" : ""}`}
+              className={`service-section ${ !isMobile && isReverse ? "reverse" : ""}`}
             >
-              {isReverse ? (
-                <>
-                  {TextBlock}
+              {!isMobile && isReverse ? (
+                <>                 
                   {ImageBlock}
+                  {TextBlock}
                 </>
               ) : (
                 <>
-                  {ImageBlock}
                   {TextBlock}
+                  {ImageBlock}
                 </>
               )}
             </section>

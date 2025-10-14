@@ -4,6 +4,23 @@ import { useState, useEffect } from "react";
 
 const Banner = ({ children, onParticlesLoaded }) => {
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [particleCount, setParticleCount] = useState(100);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 900) {
+        setParticleCount(window.innerWidth < 768 ? 40 : 100);
+      }
+      else{
+        setIsMobile(window.innerWidth < 768);
+        setParticleCount(window.innerWidth < 768 ? 8 : 20);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const particlesInit = async (engine) => {
     await loadFull(engine);
@@ -25,19 +42,18 @@ const Banner = ({ children, onParticlesLoaded }) => {
       className={`relative h-[50vh] flex items-center justify-center overflow-hidden transition-opacity duration-700 ${
         loaded ? "opacity-100" : "opacity-0"
       }`}
-      style={{
-        backgroundImage: 'radial-gradient(circle,rgb(69, 103, 148) 0%, rgb(12, 40, 77) 100%)',
-      }}
     >
       <Particles
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
+        
         options={{
+          detectRetina: !isMobile,
           fullScreen: false,
           background: { color: { value: "transparent" } },
           particles: {
-            number: { value: 100 },
+            number: { value: particleCount },
             color: { value: "#ff7b00" },
             shape: { type: "circle" },
             opacity: { value: 1 },
@@ -59,9 +75,7 @@ const Banner = ({ children, onParticlesLoaded }) => {
             events: { onHover: { enable: true, mode: "repulse" } },
           },
         }}
-      />
-      {/* Filtro oscuro */}
-      <div className="absolute inset-0 bg-black/40 z-10"></div>
+      />    
       <div className="absolute z-20 text-center px-6 text-white">{children}</div>
     </section>
   );
