@@ -16,7 +16,7 @@ const About = () => {
       </section>
 
       {/* Sección: Texto + imagen alternada */}
-      <section className="about-main">
+      <section className="about-main bg-dots-pattern-1">
         <motion.div {...fadeInLeft} className="about-text">
           <h2>Innovación y compromiso industrial</h2>
           <p>

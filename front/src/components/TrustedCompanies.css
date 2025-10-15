@@ -1,0 +1,118 @@
+.trusted-section {
+  text-align: center;
+  padding: 5rem 40px;
+  background: var(--pattern-dots-1);
+  position: relative;
+  overflow: hidden;
+}
+
+.trusted-section h2 {
+  margin-bottom: 50px;
+  font-weight: 600;
+}
+
+/* Contenedor del carrusel */
+.trusted-carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Cinta animada */
+.trusted-track {
+  display: flex;
+  gap: 2rem;
+  animation: scrollInfinite 20s linear infinite;
+  animation-play-state: var(--animation-play, running);
+}
+
+/* Pausa si el mouse entra */
+.trusted-section:hover .trusted-track {
+  animation-play-state: var(--animation-play);
+}
+
+.trusted-card {
+  width: 260px;
+  height: 260px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  perspective: 800px;
+}
+
+.trusted-card:hover {
+  transform: rotateY(15deg) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.trusted-logo img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.trusted-card:hover .trusted-logo img {
+  transform: scale(1.1);
+}
+
+.trusted-card p {
+  margin-top: 12px;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Animación infinita */
+@keyframes scrollInfinite {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .trusted-card {
+    width: 180px;
+    height: 180px;
+  }
+  .trusted-logo img {
+    width: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trusted-section {
+    padding: 60px 20px;
+  }
+  .trusted-track {
+    animation-duration: 25s;
+  }
+  .trusted-carousel {
+    overflow-x: auto; /* habilita scroll lateral */
+    -webkit-overflow-scrolling: touch; /* scroll suave en iOS */
+  }
+
+  .trusted-track {
+    animation: none; /* detiene el movimiento automático */
+    width: max-content; /* asegura que los elementos se mantengan en fila */
+    gap: 1.5rem;
+  }
+
+  .trusted-card {
+    flex: 0 0 auto; /* mantiene el tamaño fijo */
+  }
+}
+
+.trusted-track {
+  transition: animation-play-state 0.3s ease;
+}

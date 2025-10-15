@@ -33,13 +33,6 @@
   align-items: center;
 }
 
-.about-text h2 {
-  font-size: 2rem;
-  color: #0f2d55;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
 .about-text p {
   color: #555;
   line-height: 1.7;

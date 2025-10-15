@@ -13,6 +13,7 @@ import Banner from "../components/Banner";
 import { useState } from "react";
 import Spinner from "../components/Spinner";
 import Services from "../components/Services";
+import TrustedCompanies from "../components/TrustedCompanies";
 
 const Home = () => {
 
@@ -57,16 +58,15 @@ const Home = () => {
                 </section>
 
                 {/* Quiénes somos */}
-                <section className="home-about">
+                <section className="home-about bg-dots-pattern-2">
                     <motion.img {...slideRotateLeft} src={industrialImg} alt="Industria moderna" className="about-img-left" />
                     <motion.div {...fadeInRight} className="about-text-bg">
-                        <h3>¿Quiénes Somos?</h3>
+                        <h2>¿Quiénes Somos?</h2>
                         <p>
-                        Somos una empresa de soluciones industriales que ofrece productos y
-                        servicios de calidad, efectividad y valor agregado en todas sus
-                        actividades. Enfocados en incrementar la eficiencia operacional y
-                        mejora continua a través de la optimización de recursos y ahorros
-                        energéticos.
+                        Somos una empresa de soluciones industriales con más de 20 años de experiencia, 
+                        especializada en ofrecer productos y servicios de calidad, con efectividad y alto valor agregado.
+                        Trabajamos para incrementar la eficiencia operacional de nuestros clientes mediante 
+                        la optimización de recursos, automatización y ahorro energético.
                         </p>
                         <Link to="/nosotros" className="btn-orange">
                         Conócenos
@@ -76,6 +76,9 @@ const Home = () => {
                 <section>
                     <Services />
                 </section>
+                <section className="home-section bg-dots-pattern-1">
+                    <TrustedCompanies />
+                </section>          
             </div>
         </>
     );

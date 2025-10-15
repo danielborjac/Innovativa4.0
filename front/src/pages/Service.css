@@ -1,10 +1,3 @@
-.section-text h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #0f2d55;
-  margin-bottom: 1.5rem;
-}
-
 /* Banner: imagen en flujo, título absolute encima */
 .service-banner {
   position: relative;
@@ -33,14 +26,6 @@
   z-index: 2;
 }
 
-/* Contenido principal */
-.service-main {
-  padding: 6rem 8%;
-  display: flex;
-  flex-direction: column;
-  gap: 6rem;
-  background: #fff; /* asegura que cubra debajo del banner */
-}
 
 /* Grid de dos columnas, simple */
 .service-section {
@@ -51,6 +36,7 @@
   position: relative;
   box-sizing: border-box;
   width: 100%;
+  padding: 5rem 8%
 }
 
 /* img wrapper y text wrapper ocupan automáticamente cada columna */
@@ -127,6 +113,9 @@
   line-height: 1.45;
   color: #333;
 }
+.reverse {
+  background-color: #e1e0e0;
+}
 
 /* Responsive: apilar y evitar reverse issues */
 @media (max-width: 900px) {
@@ -140,6 +129,7 @@
   .service-section {
     grid-template-columns: 1fr;
     text-align: left;
+    padding: 1rem 8%;
   }
 
   /* en móvil siempre image arriba then text */
@@ -155,7 +145,4 @@
   .items-grid {
     grid-template-columns: 1fr;
   }
-  .service-main {
-  gap: 1rem;
-}
 }
