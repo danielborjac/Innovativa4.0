@@ -3,16 +3,24 @@ import React, { useState, useEffect } from "react";
 import "./TrustedCompanies.css";
 import { motion } from "framer-motion";
 import { fadeInUp, fadeInDown } from "../utils/motionConfig";
+import pichincha from "../assets/company/pichincha.png";
+import cfavorita from "../assets/company/cfavorita.png";
+import cnt from "../assets/company/cnt.png";
+import tonicorp from "../assets/company/tonicorp.png";
+import primax from "../assets/company/primax.png";
+import pronaca from "../assets/company/pronaca.png";
+import kia from "../assets/company/kia.png";
+import nestle from "../assets/company/nestle.png";
 
 const companies = [
-  { id: 1, name: "Banco Pichincha", logo: "/src/assets/company/pichincha.png" },
-  { id: 2, name: "Corporación Favorita", logo: "src/assets/company/cfavorita.png" },
-  { id: 3, name: "CNT EP", logo: "src/assets/company/cnt.png" },
-  { id: 4, name: "Tonicorp", logo: "src/assets/company/tonicorp.png" },
-  { id: 5, name: "Primax", logo: "src/assets/company/primax.png" },
-  { id: 6, name: "Pronaca", logo: "src/assets/company/pronaca.png" },
-  { id: 7, name: "Kia Ecuador", logo: "src/assets/company/kia.png" },
-  { id: 8, name: "Nestlé Ecuador", logo: "src/assets/company/nestle.png" },
+  { id: 1, name: "Banco Pichincha", logo: pichincha },
+  { id: 2, name: "Corporación Favorita", logo: cfavorita },
+  { id: 3, name: "CNT EP", logo: cnt },
+  { id: 4, name: "Tonicorp", logo: tonicorp },
+  { id: 5, name: "Primax", logo: primax },
+  { id: 6, name: "Pronaca", logo: pronaca },
+  { id: 7, name: "Kia Ecuador", logo: kia },
+  { id: 8, name: "Nestlé Ecuador", logo: nestle },
 ];
 
 // Duplicamos el arreglo para lograr el loop infinito
