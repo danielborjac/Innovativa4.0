@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import "./academicAlliances.css";
+import "./AcademicAlliances.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { fadeInUp, hover3D, slideRotateLeft} from "../utils/motionConfig";
