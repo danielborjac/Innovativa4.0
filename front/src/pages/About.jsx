@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
+import Banner from "../components/Banner";
+import { useState } from "react";
 import aboutBanner from "../assets/about-banner.jpg";
 import teamImg from "../assets/team-work.jpg";
 import processImg from "../assets/process.jpg";
@@ -7,12 +9,27 @@ import "./About.css";
 import { fadeInUp, fadeInDown, fadeInLeft, fadeInRight, fadeInZoom, slideRotateRight, slideRotateLeft,  blurReveal, hover3D, staggerContainer, fadeItem } from "../utils/motionConfig";
 
 const About = () => {
+
+    const [loading, setLoading] = useState(true);
+    const handleParticlesLoaded = () => {
+          // Espera un momento adicional para una transición más suave
+          setTimeout(() => setLoading(false), 300);
+    };
+  
+
   return (
     <div className="about">
       {/* Banner */}
-      <section className="about-banner">
+      {/*<section className="alter-banner">
         <img src={aboutBanner} alt="Equipo Innovativa" />
         <motion.h1 {...fadeInUp}>SOBRE NOSOTROS</motion.h1>
+      </section>*/}
+
+      <section className="banner">
+        <img src={aboutBanner} alt="Equipo Innovativa" />
+        <Banner onParticlesLoaded={handleParticlesLoaded}>
+            <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">SOBRE NOSOTROS</motion.h1>
+        </Banner>
       </section>
 
       {/* Sección: Texto + imagen alternada */}

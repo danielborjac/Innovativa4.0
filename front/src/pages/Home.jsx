@@ -14,6 +14,7 @@ import { useState } from "react";
 import Spinner from "../components/Spinner";
 import Services from "../components/Services";
 import TrustedCompanies from "../components/TrustedCompanies";
+import AcademicAlliances from "../components/AcademicAlliances";
 
 const Home = () => {
 
@@ -30,7 +31,7 @@ const Home = () => {
 
             <div className="home">
                 {/* Banner hero */}
-                <section className="home-banner">
+                <section className="banner">
                     <Banner onParticlesLoaded={handleParticlesLoaded}>
                         <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">SOLUCIONES INDUSTRIALES INNOVADORAS</motion.h1>
                         <motion.p {...fadeInDown} {...hover3D} className="banner-subtitle">Más de 20 años optimizando la eficiencia operativa y energética.</motion.p>
@@ -76,7 +77,10 @@ const Home = () => {
                 <section>
                     <Services />
                 </section>
-                <section className="home-section bg-dots-pattern-1">
+                <section className="home-section">
+                    <AcademicAlliances />
+                </section>
+                <section className="bg-dots-pattern-2">
                     <TrustedCompanies />
                 </section>          
             </div>

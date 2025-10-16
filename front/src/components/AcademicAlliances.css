@@ -1,0 +1,70 @@
+.alliances-section {
+  padding: 5rem 8%;
+  background: var(--pattern-dots-2);
+  text-align: center;
+}
+
+.alliances-section h2 {
+  margin-bottom: 3rem;
+}
+
+.alliances-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.alliance-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  width: 35%;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+
+}
+
+.alliance-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.alliance-logo{
+    justify-items: center;
+}
+
+.alliance-logo img {
+  width: 70%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  transition: transform 0.4s ease;
+}
+
+.alliance-card:hover .alliance-logo img {
+  transform: scale(1.15);
+}
+
+.alliance-card p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .alliances-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .alliance-card {
+    width: 90%;
+  }
+
+  .alliance-card:hover {
+    transform: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+}

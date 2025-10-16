@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import Banner from "../components/Banner";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Service.css";
@@ -154,6 +156,11 @@ const servicesContent = {
 const Service = () => {
   const { serviceId } = useParams();
   const service = servicesContent[serviceId];
+  const [loading, setLoading] = useState(true);
+  const handleParticlesLoaded = () => {
+        // Espera un momento adicional para una transición más suave
+        setTimeout(() => setLoading(false), 300);
+  };
 
   useEffect(() => {
     if (window.innerWidth > 900) { // no aplica para movil
@@ -253,9 +260,16 @@ const Service = () => {
   return (
     <div className="service-page">
       {/* Banner */}
-      <section className="service-banner">
+      {/*<section className="alter-banner">
         <img src={service.bannerImg} alt={service.title} />
         <motion.h1 {...fadeInUp}>{service.title}</motion.h1>
+      </section>*/}
+
+      <section className="banner">
+        <img src={service.bannerImg} alt={service.title} />
+        <Banner onParticlesLoaded={handleParticlesLoaded}>
+            <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">{service.title}</motion.h1>
+        </Banner>
       </section>
 
       {/* Contenido */}

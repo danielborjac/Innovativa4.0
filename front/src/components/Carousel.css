@@ -64,3 +64,10 @@
 .indicator.active {
   background-color: #ff7b00;
 }
+
+@media (max-width: 900px){
+  .carousel-img {
+    height: 100%;
+  }
+}
+  

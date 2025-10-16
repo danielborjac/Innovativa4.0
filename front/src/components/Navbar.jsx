@@ -6,17 +6,46 @@ import "./Navbar.css";
 const Navbar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false); // para desplegar servicios
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setMenuOpen(false);
-    setServicesOpen(false);
+    setActiveDropdown(null);
   }, [location]);
+
+  // 🔹 Definición centralizada de los menús
+  const menuItems = [
+    { label: "Inicio", path: "/" },
+    { label: "Nosotros", path: "/nosotros" },
+    {
+      label: "Servicios",
+      dropdown: [
+        { label: "Ingeniería Eléctrica y Electrónica", path: "/servicios/ingenieria-electrica" },
+        { label: "Ingeniería Industrial", path: "/servicios/ingenieria-industrial" },
+        { label: "Capacitaciones y Entrenamientos", path: "/servicios/capacitaciones" },
+      ],
+    },
+    {
+      label: "Alianzas Académicas",
+      dropdown: [
+        { label: "Universidad Europea de España", path: "/alianzas/Universidad-Europea" },
+        { label: "Universidad de Guayaquil", path: "/alianzas/Universidad-Guayaquil" },
+      ],
+    },
+    { label: "Contacto", path: "/contacto" },
+  ];
+
+  const handleDropdown = (label) => {
+    if (window.innerWidth <= 900) {
+      setActiveDropdown(activeDropdown === label ? null : label);
+    }
+  };
 
   return (
     <header className="navbar">
       <div className="navbar-container">
+        {/* Logo */}
         <div className="navbar-logo">
           <FaIndustry className="navbar-icon" />
           <Link to="/">
@@ -29,33 +58,40 @@ const Navbar = () => {
           {menuOpen ? <FaTimes /> : <FaBars />}
         </div>
 
+        {/* Menú principal */}
         <nav className={`navbar-links ${menuOpen ? "open" : ""}`}>
-          <Link to="/" className="nav-item">Inicio</Link>
-          <Link to="/nosotros" className="nav-item">Nosotros</Link>
-
-          {/* Menú desplegable de Servicios */}
-          <div
-            className={`nav-item dropdown ${servicesOpen ? "active" : ""}`}
-            onMouseEnter={() => window.innerWidth > 900 && setServicesOpen(true)}
-            onMouseLeave={() => window.innerWidth > 900 && setServicesOpen(false)}
-            onClick={() => window.innerWidth <= 900 && setServicesOpen(!servicesOpen)}
-          >
-            <span className="dropdown-title">Servicios ▾</span>
-
-            <div className={`dropdown-menu ${servicesOpen ? "show" : ""}`}>
-              <Link to="/servicios/ingenieria-electrica" className="dropdown-link">
-                Ingeniería Eléctrica y Electrónica
+          {menuItems.map((item) =>
+            item.dropdown ? (
+              <div
+                key={item.label}
+                className={`nav-item dropdown ${activeDropdown === item.label ? "active" : ""}`}
+                onMouseEnter={() =>
+                  window.innerWidth > 900 && setActiveDropdown(item.label)
+                }
+                onMouseLeave={() =>
+                  window.innerWidth > 900 && setActiveDropdown(null)
+                }
+                onClick={() => handleDropdown(item.label)}
+              >
+                <span className="dropdown-title">{item.label} ▾</span>
+                <div
+                  className={`dropdown-menu ${
+                    activeDropdown === item.label ? "show" : ""
+                  }`}
+                >
+                  {item.dropdown.map((sub) => (
+                    <Link key={sub.path} to={sub.path} className="dropdown-link">
+                      {sub.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link key={item.path} to={item.path} className="nav-item">
+                {item.label}
               </Link>
-              <Link to="/servicios/ingenieria-industrial" className="dropdown-link">
-                Ingeniería Industrial
-              </Link>
-              <Link to="/servicios/capacitaciones" className="dropdown-link">
-                Capacitaciones y Entrenamientos
-              </Link>
-            </div>
-          </div>
-
-          <Link to="/contacto" className="nav-item">Contacto</Link>
+            )
+          )}
         </nav>
       </div>
     </header>
