@@ -76,6 +76,18 @@ export const hover3D = {
   },
 };
 
+export const hover = {
+  whileHover: {
+    scale: 1.06,
+    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.15)",
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+  whileTap: {
+    scale: 0.98,
+    rotateX: 0,
+    rotateY: 0,
+  },
+};
 // 🔹 Stagger container (para animar varios hijos en secuencia)
 export const staggerContainer = {
   hidden: { opacity: 0 },

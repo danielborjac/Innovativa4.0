@@ -21,6 +21,7 @@ import trainingImg from "../assets/training.jpg";
 import extraImg1 from "../assets/service-extra1.jpg";
 import extraImg2 from "../assets/service-extra2.jpg";
 import extraImg3 from "../assets/service-extra3.jpg";
+import Spinner from "../components/Spinner";
 
 const servicesContent = {
   "ingenieria-electrica": {
@@ -159,7 +160,7 @@ const Service = () => {
   const [loading, setLoading] = useState(true);
   const handleParticlesLoaded = () => {
         // Espera un momento adicional para una transición más suave
-        setTimeout(() => setLoading(false), 300);
+        setTimeout(() => setLoading(false), 200);
   };
 
   useEffect(() => {
@@ -258,89 +259,92 @@ const Service = () => {
   if (!service) return <p style={{ padding: "3rem" }}>Servicio no encontrado.</p>;
 
   return (
-    <div className="service-page">
-      {/* Banner */}
-      {/*<section className="alter-banner">
-        <img src={service.bannerImg} alt={service.title} />
-        <motion.h1 {...fadeInUp}>{service.title}</motion.h1>
-      </section>*/}
+    <>
+        {loading && <Spinner />}
+      <div className="service-page">
+        {/* Banner */}
+        {/*<section className="alter-banner">
+          <img src={service.bannerImg} alt={service.title} />
+          <motion.h1 {...fadeInUp}>{service.title}</motion.h1>
+        </section>*/}
 
-      <section className="banner">
-        <img src={service.bannerImg} alt={service.title} />
-        <Banner onParticlesLoaded={handleParticlesLoaded}>
-            <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">{service.title}</motion.h1>
-        </Banner>
-      </section>
+        <section className="banner">
+          <img src={service.bannerImg} alt={service.title} />
+          <Banner onParticlesLoaded={handleParticlesLoaded}>
+              <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">{service.title}</motion.h1>
+          </Banner>
+        </section>
 
-      {/* Contenido */}
-      <div className="service-main">
-        {service.sections.map((sec, idx) => {
-          const isMobile= window.innerWidth < 768
-          const isReverse = idx % 2 !== 0;
+        {/* Contenido */}
+        <div className="service-main">
+          {service.sections.map((sec, idx) => {
+            const isMobile= window.innerWidth < 768
+            const isReverse = idx % 2 !== 0;
 
-          // Render order control: if reverse, text first then image (or opposite)
-          const ImageBlock = (
-            <motion.div
-              className="section-img-wrapper"
-              key="img"
-              variants={fadeInLeft}
-              initial="initial"
-              whileInView="whileInView"
-              viewport={{ once: true, amount: 0.25 }}
-            >
-              <img src={sec.img} alt={sec.subtitle} className="section-img" />
-            </motion.div>
-          );
-
-          const TextBlock = (
-            <motion.div
-              className="section-text"
-              key="text"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.25 }}
-            >
-              <motion.h2 variants={fadeItem}>{sec.subtitle}</motion.h2>
-
-              <motion.div className="items-grid">
-                {sec.items.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    className="item-card"
-                    variants={fadeItem}
-                    whileHover={hover3D.whileHover}
-                    whileTap={hover3D.whileTap}
-                  >
-                    <span className="item-icon">✔</span>
-                    <p>{item}</p>
-                  </motion.div>
-                ))}
+            // Render order control: if reverse, text first then image (or opposite)
+            const ImageBlock = (
+              <motion.div
+                className="section-img-wrapper"
+                key="img"
+                variants={fadeInLeft}
+                initial="initial"
+                whileInView="whileInView"
+                viewport={{ once: true, amount: 0.25 }}
+              >
+                <img src={sec.img} alt={sec.subtitle} className="section-img" />
               </motion.div>
-            </motion.div>
-          );
+            );
 
-          return (
-            <section
-              key={idx}
-              className={`service-section ${ !isMobile && isReverse ? "reverse" : ""}`}
-            >
-              {!isMobile && isReverse ? (
-                <>                 
-                  {ImageBlock}
-                  {TextBlock}
-                </>
-              ) : (
-                <>
-                  {TextBlock}
-                  {ImageBlock}
-                </>
-              )}
-            </section>
-          );
-        })}
+            const TextBlock = (
+              <motion.div
+                className="section-text"
+                key="text"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.25 }}
+              >
+                <motion.h2 variants={fadeItem}>{sec.subtitle}</motion.h2>
+
+                <motion.div className="items-grid">
+                  {sec.items.map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="item-card"
+                      variants={fadeItem}
+                      whileHover={hover3D.whileHover}
+                      whileTap={hover3D.whileTap}
+                    >
+                      <span className="item-icon">✔</span>
+                      <p>{item}</p>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            );
+
+            return (
+              <section
+                key={idx}
+                className={`service-section ${ !isMobile && isReverse ? "reverse" : ""}`}
+              >
+                {!isMobile && isReverse ? (
+                  <>                 
+                    {ImageBlock}
+                    {TextBlock}
+                  </>
+                ) : (
+                  <>
+                    {TextBlock}
+                    {ImageBlock}
+                  </>
+                )}
+              </section>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </> 
   );
 };
 

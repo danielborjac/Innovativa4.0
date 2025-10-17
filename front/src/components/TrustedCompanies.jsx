@@ -41,7 +41,7 @@ const TrustedCompanies = () => {
     setTimeout(() => {
       setPaused(false);
       setDelay(false);
-    }, 1000);
+    }, 300);
   };
 
   return (

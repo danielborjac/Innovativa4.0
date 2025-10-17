@@ -28,21 +28,7 @@
   margin-right: auto;
 }
 
-.btn-orange {
-  display: inline-block;
-  margin-top: 1.5rem;
-  background-color: #ff7b00;
-  color: white;
-  padding: 0.75rem 2rem;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: all 0.4s ease;
-}
 
-.btn-orange:hover {
-  background-color: #ff8c1a;
-  transform: translateY(-2px);
-}
 
 /* Sección de servicios */
 .home-description {
@@ -102,6 +88,9 @@
   align-items: center;
 }
 
+.map-img-right{
+  height: 90%;
+}
 /* Responsive */
 @media(max-width: 900px) {
   .home-description,
@@ -116,7 +105,16 @@
   .banner-subtitle {
     font-size: 1.1rem;
   }
-
+  .home-about {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .about-img-left {
+    margin-bottom: 2rem;
+  }
+  .map-img-right{
+    height: 100%;
+  }
 }
 
 .service-carousel {
@@ -147,15 +145,3 @@
   line-height: 1.7;
   margin-bottom: 1rem;
 }
-
-/* Responsive */
-@media(max-width: 900px) {
-  .home-about {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .about-img-left {
-    margin-bottom: 2rem;
-  }
-}
-

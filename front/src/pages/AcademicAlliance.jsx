@@ -21,7 +21,7 @@ import {
 import banner from "../assets/academics/banner-ueuropea.jpg";
 import background from "../assets/academics/background-ueuropea.jpg";
 import info from "../assets/academics/info-ueuropea.jpg";
-
+import Spinner from "../components/Spinner";
 
 const allianceData = {
     "Universidad-Europea": {
@@ -69,69 +69,72 @@ const AcademicAlliance = () => {
     const [loading, setLoading] = useState(true);
     const handleParticlesLoaded = () => {
           // Espera un momento adicional para una transición más suave
-          setTimeout(() => setLoading(false), 300);
+          setTimeout(() => setLoading(false), 200);
     };
 
   return (
-    <main className="alliance-page">
-      
-        <section className="banner">
-            <img src={banner} alt="europea" />
-            <Banner onParticlesLoaded={handleParticlesLoaded}>
-                <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">{Alliance.title.toUpperCase()}</motion.h1>
-            </Banner>
-        </section>
+    <>
+        {loading && <Spinner />}
+        <main className="alliance-page">
+        
+            <section className="banner">
+                <img src={banner} alt="europea" />
+                <Banner onParticlesLoaded={handleParticlesLoaded}>
+                    <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">{Alliance.title.toUpperCase()}</motion.h1>
+                </Banner>
+            </section>
 
-        <section className="alliance-info">
-            <div className="info-image">
-                <motion.img {...slideRotateLeft} src={Alliance.infoImage} alt={Alliance.name}/>
-            </div>
-            <div className="info-text">
-                <motion.h2 {...fadeInRight}>Sobre la Universidad</motion.h2>
-                <motion.p {...fadeInDown}>{Alliance.universityInfo}</motion.p>
-            </div>
-        </section>
+            <section className="alliance-info">
+                <div className="info-image">
+                    <motion.img {...slideRotateLeft} src={Alliance.infoImage} alt={Alliance.name}/>
+                </div>
+                <div className="info-text">
+                    <motion.h2 {...fadeInRight}>Sobre la Universidad</motion.h2>
+                    <motion.p {...fadeInDown}>{Alliance.universityInfo}</motion.p>
+                </div>
+            </section>
 
-        <section
-            className="alliance-hero"
-            style={{ backgroundImage: `url(${Alliance.background})` }}
-        >
-            <div className="overlay"></div>
-
-            <motion.div
-                          className="hero-content"
-                          key="text"
-                          variants={staggerContainer}
-                          initial="hidden"
-                          whileInView="show"
-                          viewport={{ once: true, amount: 0.25 }}
+            <section
+                className="alliance-hero"
+                style={{ backgroundImage: `url(${Alliance.background})` }}
             >
-                <motion.h5 {...fadeInLeft}>{Alliance.description}</motion.h5>
-                {/*<ul>
-                    {Alliance.items.map((item, index) => (
-                    <li key={index}>{item}</li>
-                    ))}
-                </ul>*/}
-                <motion.div style={{margin: "20px"}} className="items-grid">
-                    {Alliance.items.map((item, i) => (
-                        <motion.div
-                        key={i}
-                        style={{background:"#0a192f"}}
-                        className="item-card"
-                        variants={fadeItem}
-                        whileHover={hover3D.whileHover}
-                        whileTap={hover3D.whileTap}
-                        >
-                        <p  style={{color:"white"}}>{item}</p>
-                        </motion.div>
-                    ))}
-                </motion.div>
-                <motion.h5 {...fadeInRight}>{Alliance.conclusion}</motion.h5>
-            </motion.div>
-        </section>
+                <div className="overlay"></div>
 
-      
-    </main>
+                <motion.div
+                            className="hero-content"
+                            key="text"
+                            variants={staggerContainer}
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true, amount: 0.25 }}
+                >
+                    <motion.h5 {...fadeInLeft}>{Alliance.description}</motion.h5>
+                    {/*<ul>
+                        {Alliance.items.map((item, index) => (
+                        <li key={index}>{item}</li>
+                        ))}
+                    </ul>*/}
+                    <motion.div style={{margin: "20px"}} className="items-grid">
+                        {Alliance.items.map((item, i) => (
+                            <motion.div
+                            key={i}
+                            style={{background:"#0a192f"}}
+                            className="item-card"
+                            variants={fadeItem}
+                            whileHover={hover3D.whileHover}
+                            whileTap={hover3D.whileTap}
+                            >
+                            <p  style={{color:"white"}}>{item}</p>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                    <motion.h5 {...fadeInRight}>{Alliance.conclusion}</motion.h5>
+                </motion.div>
+            </section>
+
+        
+        </main>
+    </>
   );
 };
 

@@ -9,6 +9,8 @@ import Carousel from "../components/Carousel";
 import img1 from "../assets/carousel1.jpg";
 import img2 from "../assets/carousel2.jpg";
 import img3 from "../assets/carousel3.jpg";
+import ecuadorImg from "../assets/Ecuador.png";
+import banner from "../assets/main-banner.jpg";
 import Banner from "../components/Banner";
 import { useState } from "react";
 import Spinner from "../components/Spinner";
@@ -22,7 +24,7 @@ const Home = () => {
 
     const handleParticlesLoaded = () => {
         // Espera un momento adicional para una transición más suave
-        setTimeout(() => setLoading(false), 300);
+        setTimeout(() => setLoading(false), 700);
     };
 
     return (
@@ -32,6 +34,7 @@ const Home = () => {
             <div className="home">
                 {/* Banner hero */}
                 <section className="banner">
+                    <img src={banner} alt="home" />
                     <Banner onParticlesLoaded={handleParticlesLoaded}>
                         <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">SOLUCIONES INDUSTRIALES INNOVADORAS</motion.h1>
                         <motion.p {...fadeInDown} {...hover3D} className="banner-subtitle">Más de 20 años optimizando la eficiencia operativa y energética.</motion.p>
@@ -74,13 +77,31 @@ const Home = () => {
                         </Link>
                     </motion.div>
                 </section>
+                {/* Componente servicio */}
                 <section>
                     <Services />
                 </section>
+                {/* Componente alianzas académicas */}
                 <section className="home-section">
                     <AcademicAlliances />
                 </section>
-                <section className="bg-dots-pattern-2">
+                {/* Proyectos Destacados */}
+                <section className="home-about bg-dots-pattern-1">
+                    <motion.div {...slideRotateLeft} className="about-text-bg">
+                        <h2>Nuestros proyectos en todo Ecuador</h2>
+                        <p>
+                        Somos una empresa de soluciones industriales con más de 20 años de experiencia, 
+                        especializada en ofrecer productos y servicios de calidad, con efectividad y alto valor agregado.
+                        Trabajamos para incrementar la eficiencia operacional de nuestros clientes mediante 
+                        la optimización de recursos, automatización y ahorro energético.
+                        </p>
+                        <Link to="/proyectos" className="btn-orange">
+                        Ir a proyectos destacados
+                        </Link>
+                    </motion.div>
+                    <motion.img {...slideRotateRight} src={ecuadorImg} alt="Industria moderna" className="map-img-right" />
+                </section>
+                <section className="home-section">
                     <TrustedCompanies />
                 </section>          
             </div>

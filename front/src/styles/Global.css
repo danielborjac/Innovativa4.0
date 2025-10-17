@@ -110,6 +110,22 @@ p {
   filter: brightness(70%);
 }
 
+.btn-orange {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.btn-orange:hover {
+  background-color: #a05911;
+  transform: translateY(-2px);
+}
+
 
 .banner h1 {
   margin-top: 50px

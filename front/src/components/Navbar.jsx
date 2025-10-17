@@ -33,6 +33,7 @@ const Navbar = () => {
         { label: "Universidad de Guayaquil", path: "/alianzas/Universidad-Guayaquil" },
       ],
     },
+    { label: "Proyectos", path: "/proyectos" },
     { label: "Contacto", path: "/contacto" },
   ];
 
