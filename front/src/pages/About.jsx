@@ -8,9 +8,9 @@ import processImg from "../assets/process.jpg";
 import "./About.css";
 import { fadeInUp, fadeInDown, fadeInLeft, fadeInRight, fadeInZoom, slideRotateRight, slideRotateLeft,  blurReveal, hover3D, staggerContainer, fadeItem } from "../utils/motionConfig";
 import Spinner from "../components/Spinner";
+import { useLocation } from "react-router-dom";
 
 const About = () => {
-
     const [loading, setLoading] = useState(true);
     const handleParticlesLoaded = () => {
           // Espera un momento adicional para una transición más suave

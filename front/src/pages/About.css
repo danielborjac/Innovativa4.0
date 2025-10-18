@@ -1,5 +1,6 @@
 /* Sección principal */
 .about-main {
+  overflow-x: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
@@ -21,7 +22,7 @@
 
 /* Cita */
 .about-quote {
-  background-color: #0f2d55;
+  background-color: var(--primary-text-color);
   color: white;
   text-align: center;
   padding: 4rem 2rem;

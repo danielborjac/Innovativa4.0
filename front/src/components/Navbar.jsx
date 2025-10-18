@@ -9,7 +9,7 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
     setMenuOpen(false);
     setActiveDropdown(null);
   }, [location]);

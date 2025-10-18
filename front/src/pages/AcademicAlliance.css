@@ -25,6 +25,7 @@
 }
 
 .hero-content {
+  overflow-x: hidden;
   position: relative;
   max-width: 800px;
   z-index: 2;
@@ -34,12 +35,6 @@
   list-style: none;
   padding: 0;
   margin: 1rem 0;
-}
-
-.hero-content ul li::before {
-  content: "• ";
-  color: #00c0ff;
-  font-weight: bold;
 }
 
 .hero-content ul li {
@@ -54,7 +49,7 @@
   align-items: center;
   justify-content: center;
   gap: 3rem;
-  background: #f9f9f9;
+  background: #fff;
   padding: 5rem 3rem;
   color: #333;
 }

@@ -90,10 +90,9 @@ const Home = () => {
                     <motion.div {...slideRotateLeft} className="about-text-bg">
                         <h2>Nuestros proyectos en todo Ecuador</h2>
                         <p>
-                        Somos una empresa de soluciones industriales con más de 20 años de experiencia, 
-                        especializada en ofrecer productos y servicios de calidad, con efectividad y alto valor agregado.
-                        Trabajamos para incrementar la eficiencia operacional de nuestros clientes mediante 
-                        la optimización de recursos, automatización y ahorro energético.
+                        Nuestros proyectos en todo Ecuador reflejan la esencia de Innovativa 4.0: ingeniería avanzada, transformación digital y compromiso con 
+                        la excelencia industrial. Desde la optimización de procesos hasta la automatización inteligente, cada iniciativa impulsa la productividad 
+                        y sostenibilidad de las empresas ecuatorianas.
                         </p>
                         <Link to="/proyectos" className="btn-orange">
                         Ir a proyectos destacados

@@ -16,7 +16,7 @@
 }
 
 .alliance-card {
-  background: #fff;
+  background: white;
   border-radius: 16px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   width: 35%;
@@ -48,7 +48,7 @@
 
 .alliance-card p {
   font-size: 0.95rem;
-  color: #555;
+  color: black;
   line-height: 1.5;
 }
 

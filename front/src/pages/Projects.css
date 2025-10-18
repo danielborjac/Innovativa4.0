@@ -1,7 +1,7 @@
 @import "tailwindcss";
 .proyectos-section {
   padding: 5rem 8%;
-  background-color: #f9fafc;
+  background-color: #fff;
   color: #222;
   text-align: center;
 }
@@ -18,16 +18,14 @@
 
 .proyectos-grid {
   display: grid;
+  gap: 4rem;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  justify-items: center;
 }
 
 .proyecto-card {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  width: 100%;
-  max-width: 480px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   cursor: pointer;
 }
@@ -62,7 +60,7 @@
 .proyecto-info .arrow {
   float: right;
   font-size: 1.2rem;
-  color: #0a66c2;
+  color: var(--primary-text-color)
 }
 
 /* Modal */
@@ -110,6 +108,27 @@
   @apply bg-gray-100 dark:bg-gray-800 border-l-4 border-blue-600 p-4 rounded-lg text-gray-700 dark:text-gray-200 text-[0.95rem] shadow-inner;
 }
 
+
+.contact-cta-section {
+  position: relative;
+  padding: 8rem 2rem;
+  color: #fff;
+  text-align: center;
+}
+
+.contact-cta-overlay {
+  background: #0a192fcb;
+  backdrop-filter: brightness(60%) blur(2px);
+  padding: 6rem 2rem;
+  border-radius: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-cta-section h2 {
+  letter-spacing: 0.5px;
+}
+
 /* Animaciones */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -133,5 +152,10 @@
         height: 220px;
         object-fit: cover;
     }
-
+     .contact-cta-section {
+      padding: 6rem 1.5rem;
+    }
+    .contact-cta-overlay {
+      padding: 3rem 1.5rem;
+    }
 }

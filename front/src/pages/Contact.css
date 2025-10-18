@@ -46,7 +46,7 @@
 
 .subtitulo {
   font-size: 1rem;
-  color: #e0e0e0;
+  color: #fff;
   margin-bottom: 2rem;
 }
 .info-data{
@@ -64,7 +64,7 @@
 }
 
 .horario h4 {
-  color: #ffffff;
+  color: #fff;
   margin-top: 0.5rem;
 }
 
@@ -114,7 +114,7 @@
 .contacto-formulario input:focus,
 .contacto-formulario textarea:focus {
   outline: none;
-  border-color: #00bcd4;
+  border-color: var(--secondary-color);
 }
 
 .checkbox {
