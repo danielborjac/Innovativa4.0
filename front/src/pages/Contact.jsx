@@ -9,6 +9,7 @@ import Banner from "../components/Banner";
 import { useState } from "react";
 import Spinner from "../components/Spinner";
 import { fadeInDown, fadeInUp, hover3D, slideRotateLeft} from "../utils/motionConfig";
+import { sendContactMessage } from "../api/contact";
 
 const Contact = () => {
 
@@ -18,6 +19,72 @@ const Contact = () => {
         // Espera un momento adicional para una transición más suave
         setTimeout(() => setLoading(false), 300);
     };
+    
+    const [formData, setFormData] = useState({
+        first_name: "",
+        last_name: "",
+        company: "",
+        phone: "",
+        email: "",
+        message: "",
+        consent_personal_data: false,
+    });
+
+    const [sending, setSending] = useState(false);
+    const [status, setStatus] = useState({ type: "", message: "" });
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData({
+        ...formData,
+        [name]: type === "checkbox" ? checked : value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // validaciones mínimas
+        if (!formData.first_name || !formData.email || !formData.company) {
+        setStatus({
+            type: "error",
+            message: "Por favor, completa los campos obligatorios.",
+        });
+        return;
+        }
+
+        if (!formData.consent_personal_data) {
+        setStatus({
+            type: "error",
+            message: "Debes autorizar el tratamiento de tus datos personales.",
+        });
+        return;
+        }
+
+        setSending(true);
+        setStatus({ type: "", message: "" });
+
+        try {
+        await sendContactMessage(formData);
+        setStatus({
+            type: "success",
+            message: "¡Mensaje enviado correctamente! Te contactaremos pronto.",
+        });
+        setFormData({
+            first_name: "",
+            last_name: "",
+            company: "",
+            phone: "",
+            email: "",
+            message: "",
+            consent_personal_data: false,
+        });
+        } catch (err) {
+        setStatus({ type: "error", message: err });
+        } finally {
+        setSending(false);
+        }
+    };    
 
   return (
     <>
@@ -56,27 +123,87 @@ const Contact = () => {
                 <motion.section className="contacto-container" {...slideRotateLeft}>
                     {/* --- Formulario de contacto --- */}
                     <div className="contacto-formulario">
-                        <form>
-                        <h3>Formulario de Contacto</h3>
-                        <div className="grid-2">
-                            <input type="text" placeholder="Nombre *" required />
-                            <input type="text" placeholder="Apellidos" />
-                        </div>
-                        <input type="text" placeholder="Nombre de la empresa *" required />
-                        <div className="grid-2">
-                            <input type="tel" placeholder="Teléfono" />
-                            <input type="email" placeholder="Email *" required />
-                        </div>
-                        <textarea rows="4" placeholder="Cuéntanos tu caso o consulta..."></textarea>
+                        <form onSubmit={handleSubmit}>
+                            <h3>Formulario de Contacto</h3>
+                            <div className="grid-2">
+                                <input
+                                type="text"
+                                name="first_name"
+                                placeholder="Nombre *"
+                                value={formData.first_name}
+                                onChange={handleChange}
+                                required
+                                />
+                                <input
+                                type="text"
+                                name="last_name"
+                                placeholder="Apellidos"
+                                value={formData.last_name}
+                                onChange={handleChange}
+                                />
+                            </div>
 
-                        <div className="checkbox">
-                            <input type="checkbox" id="consent" />
-                            <label htmlFor="consent">
-                            Autorizo el tratamiento de mis datos personales conforme a la política de privacidad.
-                            </label>
-                        </div>
+                            <input
+                                type="text"
+                                name="company"
+                                placeholder="Nombre de la empresa *"
+                                value={formData.company}
+                                onChange={handleChange}
+                                required
+                            />
 
-                        <button type="submit" className="btn-orange">Enviar</button>
+                            <div className="grid-2">
+                                <input
+                                type="tel"
+                                name="phone"
+                                placeholder="Teléfono"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                />
+                                <input
+                                type="email"
+                                name="email"
+                                placeholder="Email *"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                />
+                            </div>
+
+                            <textarea
+                                rows="4"
+                                name="message"
+                                placeholder="Cuéntanos tu caso o consulta..."
+                                value={formData.message}
+                                onChange={handleChange}
+                            ></textarea>
+
+                            <div className="checkbox">
+                                <input
+                                type="checkbox"
+                                id="consent"
+                                name="consent_personal_data"
+                                checked={formData.consent_personal_data}
+                                onChange={handleChange}
+                                />
+                                <label htmlFor="consent">
+                                Autorizo el tratamiento de mis datos personales conforme a la política de privacidad.
+                                </label>
+                            </div>
+
+                            {status.message && (
+                                <p
+                                className={`text-sm mt-2 ${
+                                    status.type === "success" ? "text-green-400" : "text-red-400"
+                                }`}
+                                >
+                                {status.message}
+                                </p>
+                            )}
+
+                            <button type="submit" className="btn-orange" disabled={sending}>
+                                {sending ? "Enviando..." : "Enviar"}
+                            </button>
                         </form>
                     </div>
                 </motion.section>
