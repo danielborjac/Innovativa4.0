@@ -19,7 +19,7 @@
 .proyectos-grid {
   display: grid;
   gap: 4rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .proyecto-card {
@@ -143,9 +143,10 @@
 @media (max-width: 900px) {
     .proyectos-grid {
         gap: 2rem;
+        grid-template-columns: 1fr;
     }
     .modal-image {
-        height: 240px;
+        height: 170px;
     }
     .proyecto-card img {
         width: 100%;
