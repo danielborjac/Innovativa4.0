@@ -26,13 +26,13 @@ const Footer = () => {
         <div className="footer-section contact">
           <h4>Contáctanos</h4>
           <p><FaMapMarkerAlt /> Quito, Ecuador</p>
-          <p><FaPhoneAlt /> +593 99 999 9999</p>
-          <p><FaEnvelope /> contacto@innovativa40.com</p>
+          <p><FaPhoneAlt /> +593 988 475 968</p>
+          <p><FaEnvelope /> ingenieria@innovativa40.com</p>
 
           <div className="social-icons">
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaLinkedinIn /></a>
-            <a href="#"><FaInstagram /></a>
+            <a href="https://www.facebook.com/innovativa4.0/?locale=es_LA"><FaFacebookF /></a>
+            <a href="https://www.linkedin.com/company/innovativa-4-0/?originalSubdomain=ec"><FaLinkedinIn /></a>
+            {/*<a href="#"><FaInstagram /></a>*/}
           </div>
         </div>
       </div>

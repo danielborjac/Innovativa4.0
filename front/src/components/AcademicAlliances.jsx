@@ -15,13 +15,6 @@ const alliances = [
     description: "Colaboración en programas de formación internacional y proyectos de innovación educativa.",
     link: "alianzas/Universidad-Europea"
   },
-  {
-    id: 2,
-    name: "Universidad de Guayaquil",
-    logo: ug,
-    description: "Alianza académica enfocada en el desarrollo tecnológico y la educación superior en Ecuador.",
-    link: "alianzas/Universidad-Guayaquil"
-  },
 ];
 
 const AcademicAlliances = () => {

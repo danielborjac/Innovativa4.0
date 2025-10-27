@@ -105,18 +105,17 @@ const Contact = () => {
                         <h3>¡TE RESPONDEREMOS EN BREVEDAD!</h3>
                         <div className="info-item horario">
                             <h4>Horario de atención:</h4>
-                            <p>Lunes a Viernes: 08h00 - 17h00</p>
-                            <p>Sábados: 09h00 - 13h00</p>
+                            <p>Lunes a Viernes: 08h00 - 19h00</p>
                         </div>
                     </motion.div>
                     <motion.div {...fadeInDown}>
-                        <div className="info-data"><FaPhoneAlt /> <p>+593 99 999 9999</p></div>
-                        <div className="info-data"><FaEnvelope /> <p>info@innovativa40.com</p></div>
-                        <div className="info-data"><FaMapMarkerAlt /> <p>Av. Amazonas y Colón, Quito - Ecuador</p></div>
+                        <div className="info-data"><FaPhoneAlt /> <p>+593 988 475 968</p></div>
+                        <div className="info-data"><FaEnvelope /> <p>ingenieria@innovativa40.com</p></div>
+                        <div className="info-data"><FaMapMarkerAlt /> <p>2VP4+QV6, Chile, Cayambe - Ecuador</p></div>
                          <div className="redes">
-                            <FaFacebook />
-                            <FaLinkedin />
-                            <FaInstagram />
+                            <a href="https://www.facebook.com/innovativa4.0/?locale=es_LA"><FaFacebook/></a>
+                            <a href="https://www.linkedin.com/company/innovativa-4-0/?originalSubdomain=ec"><FaLinkedin href="https://www.facebook.com/innovativa4.0/?locale=es_LA"/></a>
+                            {/*<FaInstagram />*/}
                         </div>
                     </motion.div>
                 </section>

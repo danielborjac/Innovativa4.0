@@ -24,6 +24,7 @@ const Sidebar = () => {
         <h3>Innovativa 4.0</h3>
         <nav>
           <NavLink to="/admin" end>Inicio</NavLink>
+          <NavLink to="/admin/contact">Contactos</NavLink>
           <NavLink to="/admin/projects">Proyectos</NavLink>
           <NavLink to="/admin/alliances">Alianzas</NavLink>
         </nav>

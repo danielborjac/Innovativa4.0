@@ -35,3 +35,32 @@ export const sendContactMessage = async (data) => {
     );
   }
 };
+
+// Obtener todos los contactos (paginado)
+export const getAllContacts = async (page = 1, limit = 10) => {
+  const token = localStorage.getItem("token");
+  try {
+    const { data } = await contactApi.get(`/contact?page=${page}&limit=${limit}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return { success: true, data: data.data };
+  } catch (error) {
+    console.error("Error al obtener contactos:", error);
+    return { success: false, message: error.response?.data?.message || "Error al obtener contactos" };
+  }
+};
+
+// Obtener contactos por rango de fechas
+export const getContactsByDateRange = async (startDate, endDate, page = 1, limit = 10) => {
+  const token = localStorage.getItem("token");
+  try {
+    const { data } = await contactApi.get(
+      `/contact/range?startDate=${startDate}&endDate=${endDate}&page=${page}&limit=${limit}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error al filtrar contactos:", error);
+    return { success: false, message: error.response?.data?.message || "Error al filtrar contactos" };
+  }
+};

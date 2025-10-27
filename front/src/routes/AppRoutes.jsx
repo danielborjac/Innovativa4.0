@@ -12,6 +12,7 @@ import AdminLayout from "../components/admin/AdminLayout";
 import DashboardHome from "../pages/admin/DashboardHome";
 import ProjectsPage from "../pages/admin/ProjectsPage";
 import AlliancesPage from "../pages/admin/AlliancesPage";
+import ContactPage from "../pages/admin/ContactPage";
 import UsersPage from "../pages/admin/UsersPage";
 import ProtectedRoute from "../components/common/ProtectedRoute";
 
@@ -41,6 +42,7 @@ const AppRoutes = () => {
         <Route index element={<DashboardHome />} />
         <Route path="projects" element={<ProjectsPage />} />
         <Route path="alliances" element={<AlliancesPage />} />
+        <Route path="contact" element={<ContactPage />} />
         <Route path="users" element={<UsersPage />} />
       </Route>
     </Routes>

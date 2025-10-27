@@ -3,24 +3,31 @@ import React, { useState, useEffect } from "react";
 import "./TrustedCompanies.css";
 import { motion } from "framer-motion";
 import { fadeInUp, fadeInDown } from "../utils/motionConfig";
-import pichincha from "../assets/company/pichincha.png";
-import cfavorita from "../assets/company/cfavorita.png";
-import cnt from "../assets/company/cnt.png";
-import tonicorp from "../assets/company/tonicorp.png";
-import primax from "../assets/company/primax.png";
-import pronaca from "../assets/company/pronaca.png";
-import kia from "../assets/company/kia.png";
-import nestle from "../assets/company/nestle.png";
+import holandesa from "../assets/company/Holandesa.png";
+import Universae from "../assets/company/Universae.png";
+import Terranostra from "../assets/company/Terranostra.png";
+import salgraf from "../assets/company/Salgraf.png";
+import Nativaromas from "../assets/company/Nativaromas.png";
+import ferrero from "../assets/company/Ferrero.png";
+import reylacteos from "../assets/company/Reylacteos.png";
+import globalservice from "../assets/company/Globalservice.png";
+import Alinatura from "../assets/company/Alinatura.png";
+import CTI from "../assets/company/CTI.png";
+import ordeno from "../assets/company/ordeno.png";
 
 const companies = [
-  { id: 1, name: "Banco Pichincha", logo: pichincha },
-  { id: 2, name: "Corporación Favorita", logo: cfavorita },
-  { id: 3, name: "CNT EP", logo: cnt },
-  { id: 4, name: "Tonicorp", logo: tonicorp },
-  { id: 5, name: "Primax", logo: primax },
-  { id: 6, name: "Pronaca", logo: pronaca },
-  { id: 7, name: "Kia Ecuador", logo: kia },
-  { id: 8, name: "Nestlé Ecuador", logo: nestle },
+  { id: 1, name: "Rey lácteos", logo: reylacteos },
+  { id: 2, name: "LA holandesa", logo: holandesa },
+  { id: 3, name: "Universae", logo: Universae },
+  { id: 4, name: "Terra nostra", logo: Terranostra },
+  { id: 5, name: "Salgraf", logo: salgraf },
+  { id: 6, name: "Nativaromas", logo: Nativaromas },
+  { id: 7, name: "Alinatura", logo: Alinatura },
+  { id: 8, name: "Ferrero", logo: ferrero },
+  /*{ id: 9, name: "Inploca", logo: inploca },*/
+  { id: 10, name: "Global service", logo: globalservice },
+  { id: 11, name: "CTI", logo: CTI },
+  { id: 12, name: "El Ordeño", logo: ordeno },
 ];
 
 // Duplicamos el arreglo para lograr el loop infinito

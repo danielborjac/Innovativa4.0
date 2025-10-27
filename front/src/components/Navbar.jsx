@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaIndustry, FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
+import logo from "../assets/logo.png"
 
 const Navbar = () => {
   const location = useLocation();
@@ -48,9 +49,10 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Logo */}
         <div className="navbar-logo">
-          <FaIndustry className="navbar-icon" />
+          {/*<FaIndustry className="navbar-icon" />*/}
           <Link to="/">
-            <h1>INNOVATIVA 4.0</h1>
+            <img src={logo}/>
+            {/*<h1>INNOVATIVA 4.0</h1>*/}
           </Link>
         </div>
 

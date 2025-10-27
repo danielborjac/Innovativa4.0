@@ -4,6 +4,7 @@ const emailQueue = require('../queues/email.queue');
 const { enqueueMail, sendMailNow } = require('../utils/mailer');
 const config = require('../config');
 const logger = require('../utils/logger');
+const { Op } = require('sequelize');
 
 async function createContact(data) {
   const contact = await Contact.create(data);
@@ -42,4 +43,37 @@ async function createContact(data) {
   return contact;
 }
 
-module.exports = { createContact };
+async function getAllContacts({ page = 1, limit = 10 }) {
+  const offset = (page - 1) * limit;
+  const { count, rows } = await Contact.findAndCountAll({
+    limit,
+    offset,
+    order: [['createdAt', 'DESC']]
+  });
+
+  return {
+    total: count,
+    page,
+    totalPages: Math.ceil(count / limit),
+    contacts: rows
+  };
+}
+
+async function getContactsByDateRange(startDate, endDate, page = 1, limit = 10) {
+  const offset = (page - 1) * limit;
+
+  const { count, rows } = await Contact.findAndCountAll({
+    where: {
+      createdAt: {
+        [Op.between]: [new Date(startDate), new Date(`${endDate}T23:59:59`)],
+      },
+    },
+    order: [['createdAt', 'DESC']],
+    limit,
+    offset,
+  });
+
+  return { contacts: rows, total: count };
+}
+
+module.exports = { createContact, getAllContacts, getContactsByDateRange };

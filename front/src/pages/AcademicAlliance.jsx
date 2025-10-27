@@ -30,35 +30,17 @@ const allianceData = {
         background: background,
         infoImage: info,
         description:
-        "INNOVATIVA-40 S.A.S. mantiene una alianza estratégica internacional con la Universidad Europea de España, enfocada en:",
+        "En INNOVATIVA-40 S.A.S fortalecemos nuestro compromiso con la formación profesional y la innovación tecnológica a través de nuestra alianza con la Universidad Europea, institución de prestigio internacional reconocida por su excelencia académica y enfoque global, etre los puntos más importantes:",
         items: [
-        "Pasantías internacionales para alumnos",
-        "Desarrollo de proyectos conjuntos",
-        "Formación continua especializada",
-        "Transferencia de conocimientos técnicos",
+        "fortalecemos el vínculo entre la academia y la industria ecuatoriana.",
+        "Recibimos pasantes y profesionales de todo el mundo.",
+        "Promovemos la innovación, el intercambio de conocimiento y el desarrollo de soluciones tecnológicas de alto nivel para el sector industrial.",
+        "Formamos talento, impulsamos la industria.",
         ],
         conclusion:
-        "Esta colaboración refuerza nuestro compromiso con el desarrollo profesional, la educación y la innovación en la industria.",
+        "Gracias a esta colaboración, recibimos pasantes y profesionales de distintas partes del mundo, quienes aportan nuevas perspectivas, conocimientos y experiencias a nuestros proyectos industriales. Esta alianza estratégica integra la academia y la industria ecuatoriana, fomentando la transferencia de conocimiento, la investigación aplicada y el desarrollo de soluciones innovadoras que impulsan la productividad y la competitividad del sector industrial nacional.",
         universityInfo:
         "La Universidad Europea es una de las instituciones privadas líderes en Europa, reconocida por su modelo educativo innovador, enfoque internacional y programas adaptados al mercado laboral. Destaca por sus recursos e instalaciones formativas de vanguardia, cuenta con más de 25 hectáreas, 5 edificios docentes y un extenso complejo deportivo dotado de piscinas, gimnasio, pista de atletismo, canchas de tenis, fútbol, pádel, pista de vóley-playa y pabellón deportivo. Su alianza con INNOVATIVA-40 impulsa la formación técnica avanzada y la creación de oportunidades académicas globales.",
-    },
-    "Universidad-Guayaquil": {
-        title: "Universidad de Guayaquil",
-        bannerImage: "",
-        background: "/src/assets/academics/banner-uguayaquil.jpg",
-        infoImage: "/src/assets/academics/info-uguayaquil.jpg",
-        description:
-        "INNOVATIVA-40 S.A.S. mantiene una alianza académica nacional con la Universidad de Guayaquil, orientada a fortalecer el desarrollo tecnológico y la educación superior en el Ecuador mediante:",
-        items: [
-        "Programas conjuntos de investigación aplicada",
-        "Formación técnica y profesional especializada",
-        "Desarrollo de proyectos de innovación educativa",
-        "Transferencia de conocimiento en transformación digital",
-        ],
-        conclusion:
-        "Esta cooperación impulsa la excelencia académica y refuerza el vínculo entre la universidad y el sector productivo nacional.",
-        universityInfo:
-        "La Universidad de Guayaquil es una de las instituciones públicas más emblemáticas del país, reconocida por su trayectoria académica y compromiso con la sociedad ecuatoriana. Su colaboración con INNOVATIVA-40 promueve el crecimiento tecnológico, la investigación aplicada y la capacitación profesional continua.",
     }
 };
 
