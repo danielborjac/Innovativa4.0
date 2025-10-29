@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 // 2️⃣ CORS — ajusta el origin según tus dominios reales
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://innovativa40.com'],
+  origin: ['http://localhost:5173', 'https://innovativa40.com', "https://innovativa4-0.vercel.app"],
   credentials: true,
   optionsSuccessStatus: 200
 }));
