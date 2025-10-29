@@ -51,7 +51,7 @@
 }
 
 .login-form button:hover {
-  background: #005fa3;
+  background: var(--primary-color)
 }
 
 .error-msg {

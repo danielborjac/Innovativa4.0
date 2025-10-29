@@ -30,7 +30,7 @@ const allianceData = {
         background: background,
         infoImage: info,
         description:
-        "En INNOVATIVA-40 S.A.S fortalecemos nuestro compromiso con la formación profesional y la innovación tecnológica a través de nuestra alianza con la Universidad Europea, institución de prestigio internacional reconocida por su excelencia académica y enfoque global, etre los puntos más importantes:",
+        "En INNOVATIVA-40 S.A.S fortalecemos nuestro compromiso con la formación profesional y la innovación tecnológica a través de nuestra alianza con la Universidad Europea, institución de prestigio internacional reconocida por su excelencia académica y enfoque global, entre los puntos más importantes:",
         items: [
         "fortalecemos el vínculo entre la academia y la industria ecuatoriana.",
         "Recibimos pasantes y profesionales de todo el mundo.",
@@ -38,7 +38,7 @@ const allianceData = {
         "Formamos talento, impulsamos la industria.",
         ],
         conclusion:
-        "Gracias a esta colaboración, recibimos pasantes y profesionales de distintas partes del mundo, quienes aportan nuevas perspectivas, conocimientos y experiencias a nuestros proyectos industriales. Esta alianza estratégica integra la academia y la industria ecuatoriana, fomentando la transferencia de conocimiento, la investigación aplicada y el desarrollo de soluciones innovadoras que impulsan la productividad y la competitividad del sector industrial nacional.",
+        "Gracias a esta colaboración, recibimos pasantes y profesionales de distintas partes del mundo. Esta alianza estratégica fomenta la transferencia de conocimientos, la investigación aplicada y el desarrollo de soluciones innovadoras que impulsan la productividad y la competitividad del sector industrial nacional.",
         universityInfo:
         "La Universidad Europea es una de las instituciones privadas líderes en Europa, reconocida por su modelo educativo innovador, enfoque internacional y programas adaptados al mercado laboral. Destaca por sus recursos e instalaciones formativas de vanguardia, cuenta con más de 25 hectáreas, 5 edificios docentes y un extenso complejo deportivo dotado de piscinas, gimnasio, pista de atletismo, canchas de tenis, fútbol, pádel, pista de vóley-playa y pabellón deportivo. Su alianza con INNOVATIVA-40 impulsa la formación técnica avanzada y la creación de oportunidades académicas globales.",
     }

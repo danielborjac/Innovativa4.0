@@ -81,3 +81,62 @@ export const refreshTokenRequest = async () => {
     return null;
   }
 };
+
+// ==========================
+// Endpoints Admin
+// ==========================
+
+// 🔹 Obtener lista de usuarios (con paginación, filtros por rol/estado)
+export const getUsers = async (page = 1, limit = 10, role, is_active) => {
+  try {
+    const params = { page, limit };
+    if (role) params.role = role;
+    if (is_active !== undefined) params.is_active = is_active;
+
+    const token = localStorage.getItem("token");
+    const { data } = await api.get("/users", {
+      params,
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return data.data;
+  } catch (error) {
+    console.error("Error obteniendo usuarios:", error);
+    throw error;
+  }
+};
+
+// 🔹 Obtener usuario por ID
+export const getUserById = async (id) => {
+  const token = localStorage.getItem("token");
+  const { data } = await api.get(`/users/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return data.data;
+};
+
+// 🔹 Crear usuario
+export const createUser = async (userData) => {
+  const token = localStorage.getItem("token");
+  const { data } = await api.post("/users/register", userData, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return data.data;
+};
+
+// 🔹 Editar usuario
+export const updateUser = async (id, userData) => {
+  const token = localStorage.getItem("token");
+  const { data } = await api.put(`/users/${id}`, userData, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return data.data;
+};
+
+// 🔹 Eliminar usuario
+export const deleteUser = async (id) => {
+  const token = localStorage.getItem("token");
+  const { data } = await api.delete(`/users/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return data.data;
+};

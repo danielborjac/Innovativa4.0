@@ -13,7 +13,7 @@ const User = sequelize.define('User', {
   password: { type: Sequelize.DataTypes.STRING(200), allowNull: false },
   first_name: { type: Sequelize.DataTypes.STRING(100), allowNull: true },
   last_name: { type: Sequelize.DataTypes.STRING(100), allowNull: true },
-  role: { type: Sequelize.DataTypes.ENUM('admin','editor','viewer'), defaultValue: 'viewer' },
+  role: { type: Sequelize.DataTypes.ENUM('admin','editor'), defaultValue: 'editor' },
   is_active: { type: Sequelize.DataTypes.BOOLEAN, defaultValue: true },
   created_at: { type: Sequelize.DataTypes.DATE, allowNull: false, defaultValue: Sequelize.Sequelize.fn('NOW') },
   updated_at: { type: Sequelize.DataTypes.DATE, allowNull: false, defaultValue: Sequelize.Sequelize.fn('NOW') }

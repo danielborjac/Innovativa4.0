@@ -7,11 +7,12 @@ const { sequelize } = require('./db');
 const config = require('./config');
 const logger = require('./utils/logger');
 const path = require('path');
-const projectRoutes = require('./routes/project.routes');
 
 // Routes
 const contactRoutes = require('./routes/contact.routes');
 const authRoutes = require('./routes/auth.routes');
+const projectRoutes = require('./routes/project.routes');
+const companyRoutes = require('./routes/company.routes');
 
 // Middlewares
 const errorHandler = require('./middlewares/errorHandler');
@@ -45,10 +46,8 @@ app.use('/api/', limiter);
 // 4️⃣ Rutas principales
 app.use('/api/contact', contactRoutes);
 app.use('/api/users', authRoutes); // login/register/etc.
-if (process.env.NODE_ENV !== 'production') {
-  app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-}
 app.use('/api/projects', projectRoutes);
+app.use('/api/companies', companyRoutes);
 
 // 5️⃣ Manejador global de errores
 app.use(errorHandler);

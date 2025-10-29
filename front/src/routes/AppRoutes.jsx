@@ -15,6 +15,7 @@ import AlliancesPage from "../pages/admin/AlliancesPage";
 import ContactPage from "../pages/admin/ContactPage";
 import UsersPage from "../pages/admin/UsersPage";
 import ProtectedRoute from "../components/common/ProtectedRoute";
+import CompaniesPage from "../pages/admin/CompaniesPage";
 
 const AppRoutes = () => {
   return (
@@ -43,6 +44,7 @@ const AppRoutes = () => {
         <Route path="projects" element={<ProjectsPage />} />
         <Route path="alliances" element={<AlliancesPage />} />
         <Route path="contact" element={<ContactPage />} />
+        <Route path="companies" element={<CompaniesPage />} />
         <Route path="users" element={<UsersPage />} />
       </Route>
     </Routes>

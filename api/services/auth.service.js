@@ -9,13 +9,25 @@ const SALT_ROUNDS = Number(process.env.PASSWORD_SALT_ROUNDS || config.PASSWORD_S
 const MAX_ATTEMPTS = Number(process.env.MAX_LOGIN_ATTEMPTS || config.MAX_LOGIN_ATTEMPTS || 5);
 const LOCK_TIME = Number(process.env.LOCK_TIME_SECONDS || config.LOCK_TIME_SECONDS || 600);
 
-async function register({ email, password, first_name, last_name }) {
+async function register({ email, password, first_name, last_name, role = 'editor' }) {
   const existing = await User.findOne({ where: { email } });
   if (existing) throw Object.assign(new Error('Email already in use'), { status: 409 });
 
+  // Evitar que cualquiera cree un admin manualmente (solo admin puede hacerlo)
+  if (role === 'admin') {
+    throw Object.assign(new Error('No autorizado para crear administradores'), { status: 403 });
+  }
+
   const hash = await bcrypt.hash(password, SALT_ROUNDS);
-  const user = await User.create({ email, password: hash, first_name, last_name });
-  return { id: user.id, email: user.email };
+  const user = await User.create({
+    email,
+    password: hash,
+    first_name,
+    last_name,
+    role, // se mantiene "editor" por defecto
+  });
+
+  return { id: user.id, email: user.email, role: user.role };
 }
 
 async function isLocked(email) {

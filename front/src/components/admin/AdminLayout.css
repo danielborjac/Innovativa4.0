@@ -59,15 +59,6 @@
   flex-direction: column;
 }
 
-.admin-header {
-  background: white;
-  padding: 15px 25px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .admin-main {
   flex: 1;
   padding: 25px;

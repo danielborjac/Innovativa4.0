@@ -31,7 +31,6 @@ const Navbar = () => {
       label: "Alianzas Académicas",
       dropdown: [
         { label: "Universidad Europea de España", path: "/alianzas/Universidad-Europea" },
-        { label: "Universidad de Guayaquil", path: "/alianzas/Universidad-Guayaquil" },
       ],
     },
     { label: "Proyectos", path: "/proyectos" },
