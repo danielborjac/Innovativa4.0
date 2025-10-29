@@ -5,6 +5,7 @@ const redis = require('../utils/redis.client');
 const config = require('../config');
 const logger = require('../utils/logger');
 
+const USE_REDIS = process.env.USE_REDIS === 'true';
 const SALT_ROUNDS = Number(process.env.PASSWORD_SALT_ROUNDS || config.PASSWORD_SALT_ROUNDS || 12);
 const MAX_ATTEMPTS = Number(process.env.MAX_LOGIN_ATTEMPTS || config.MAX_LOGIN_ATTEMPTS || 5);
 const LOCK_TIME = Number(process.env.LOCK_TIME_SECONDS || config.LOCK_TIME_SECONDS || 600);
@@ -19,31 +20,26 @@ async function register({ email, password, first_name, last_name, role = 'editor
   }
 
   const hash = await bcrypt.hash(password, SALT_ROUNDS);
-  const user = await User.create({
-    email,
-    password: hash,
-    first_name,
-    last_name,
-    role, // se mantiene "editor" por defecto
-  });
-
+  const user = await User.create({ email, password: hash, first_name, last_name, role });
   return { id: user.id, email: user.email, role: user.role };
 }
 
 async function isLocked(email) {
+  if (!USE_REDIS) return false;
   const key = `login:lock:${email}`;
   const val = await redis.get(key);
   return val !== null;
 }
 
 async function incrementLoginAttempts(email) {
+  if (!USE_REDIS) return { locked: false, attempts: 0 };
+
   const attemptsKey = `login:attempts:${email}`;
   const lockKey = `login:lock:${email}`;
 
   const attempts = await redis.incr(attemptsKey);
-  if (attempts === 1) {
-    await redis.expire(attemptsKey, LOCK_TIME);
-  }
+  if (attempts === 1) await redis.expire(attemptsKey, LOCK_TIME);
+
   if (attempts >= MAX_ATTEMPTS) {
     await redis.set(lockKey, '1', 'EX', LOCK_TIME);
     await redis.del(attemptsKey);
@@ -53,6 +49,7 @@ async function incrementLoginAttempts(email) {
 }
 
 async function resetLoginAttempts(email) {
+  if (!USE_REDIS) return;
   await redis.del(`login:attempts:${email}`);
   await redis.del(`login:lock:${email}`);
 }
@@ -82,10 +79,11 @@ async function login({ email, password }) {
   const accessToken = signAccessToken(payload);
   const refreshToken = signRefreshToken({ sub: user.id });
 
-  // store refresh token in redis with TTL for revocation and logout
-  const refreshKey = `refresh:${user.id}:${refreshToken}`;
-  const ttlSeconds = 7 * 24 * 3600; // fallback if env not set
-  await redis.set(refreshKey, '1', 'EX', ttlSeconds);
+  if (USE_REDIS) {
+    const refreshKey = `refresh:${user.id}:${refreshToken}`;
+    const ttlSeconds = 7 * 24 * 3600;
+    await redis.set(refreshKey, '1', 'EX', ttlSeconds);
+  }
 
   return { user: { id: user.id, email: user.email, role: user.role }, accessToken, refreshToken };
 }
@@ -97,39 +95,40 @@ async function refreshTokens(refreshToken) {
   let payload;
   try {
     payload = verifyRefreshToken(refreshToken);
-  } catch (err) {
+  } catch {
     throw Object.assign(new Error('Invalid refresh token'), { status: 401 });
   }
 
-  // check stored token
-  const refreshKey = `refresh:${payload.sub}:${refreshToken}`;
-  const exists = await redis.get(refreshKey);
-  if (!exists) throw Object.assign(new Error('Refresh token revoked'), { status: 401 });
-
-  // optional: revoke old refresh token to implement rotating refresh tokens
-  await redis.del(refreshKey);
-
-  // issue new tokens
   const user = await User.findByPk(payload.sub);
   if (!user) throw Object.assign(new Error('User not found'), { status: 404 });
 
+  // Si Redis está activo, verificamos que el refresh token no haya sido revocado
+  if (USE_REDIS) {
+    const refreshKey = `refresh:${payload.sub}:${refreshToken}`;
+    const exists = await redis.get(refreshKey);
+    if (!exists) throw Object.assign(new Error('Refresh token revoked'), { status: 401 });
+    await redis.del(refreshKey);
+  }
+
   const newAccess = signAccessToken({ sub: user.id, email: user.email, role: user.role });
   const newRefresh = signRefreshToken({ sub: user.id });
-  const ttlSeconds = 7 * 24 * 3600;
-  await redis.set(`refresh:${user.id}:${newRefresh}`, '1', 'EX', ttlSeconds);
+
+  if (USE_REDIS) {
+    const ttlSeconds = 7 * 24 * 3600;
+    await redis.set(`refresh:${user.id}:${newRefresh}`, '1', 'EX', ttlSeconds);
+  }
 
   return { accessToken: newAccess, refreshToken: newRefresh, user: { id: user.id, email: user.email, role: user.role } };
 }
 
 async function logout(userId, refreshToken) {
-  // remove stored refresh token(s)
-  if (refreshToken) {
-    await redis.del(`refresh:${userId}:${refreshToken}`);
-  } else {
-    // remove all refresh tokens for user (caution in multi-device)
-    const pattern = `refresh:${userId}:*`;
-    const keys = await redis.keys(pattern);
-    if (keys.length) await redis.del(...keys);
+  if (USE_REDIS) {
+    if (refreshToken) {
+      await redis.del(`refresh:${userId}:${refreshToken}`);
+    } else {
+      const keys = await redis.keys(`refresh:${userId}:*`);
+      if (keys.length) await redis.del(...keys);
+    }
   }
   return true;
 }

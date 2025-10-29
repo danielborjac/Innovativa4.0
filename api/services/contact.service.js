@@ -28,10 +28,10 @@ async function createContact(data) {
       removeOnComplete: true,
       removeOnFail: false
     });
-    logger.info('Contact email enqueued');
+    logger.info('Contact email enqueued or sent immediately');
   } catch (err) {
-    logger.error('Error enqueuing contact email', err);
-    // Fallback: intentar enviar inmediatamente (mejor que nada)
+    logger.error('Error enqueuing/sending contact email', err);
+    // En caso extremo, intenta enviar directo
     try {
       await sendMailNow(mailOptions);
       logger.info('Fallback: email enviado inmediatamente');

@@ -55,6 +55,12 @@ async function sendMailNow(mailOptions) {
 // enqueue wrapper (opcional): añade a la cola — pero la cola ya debe existir/ser importada donde se use.
 // Lo dejamos disponible por si en algún servicio prefieres encolar desde aquí.
 function enqueueMail(emailQueue, mailOptions, queueOpts = {}) {
+  const useRedis = process.env.USE_REDIS === 'true';
+  if (!useRedis || !emailQueue) {
+    logger.warn('Redis queue disabled — sending email directly.');
+    return sendMailNow(mailOptions);
+  }
+
   logger.info('Enqueueing email', { to: mailOptions.to, subject: mailOptions.subject });
   return emailQueue.add({ mailOptions }, queueOpts);
 }
