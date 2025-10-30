@@ -4,7 +4,13 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import industrialImg from "../assets/industrial-team.jpg";
 import "./Home.css";
-import { fadeInUp, fadeInDown, fadeInLeft, fadeInRight, fadeInZoom, slideRotateRight, slideRotateLeft,  blurReveal, hover3D, staggerContainer, fadeItem } from "../utils/motionConfig";
+import {
+  useFadeInLeft,
+  useFadeInRight,
+  useSlideRotateLeft,
+  hover3D,
+  useSlideRotateRight,
+} from "../utils/motionConfig";
 import Carousel from "../components/Carousel";
 import img1 from "../assets/carousel1.jpg";
 import img2 from "../assets/carousel2.jpg";
@@ -32,14 +38,14 @@ const Home = () => {
                     <img src={banner} alt="home" />
                     <Banner/>
                     <div className="banner-content">
-                        <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">SOLUCIONES INDUSTRIALES INNOVADORAS</motion.h1>
-                        <motion.p {...fadeInDown} {...hover3D} className="banner-subtitle">Más de 20 años optimizando la eficiencia operativa y energética.</motion.p>
+                        <motion.h1 {...hover3D} className="banner-title">SOLUCIONES INDUSTRIALES INNOVADORAS</motion.h1>
+                        <motion.p {...hover3D} className="banner-subtitle">Más de 20 años optimizando la eficiencia operativa y energética.</motion.p>
                     </div>
                 </section>
 
                 {/* Sección: Servicios principales alternados */}
                 <section className="home-description">
-                    <motion.div {...fadeInLeft} className="service-text">
+                    <motion.div {...useFadeInLeft()} className="service-text">
                         <h2>Eficiencia y Tecnología</h2>
                         <p>
                             Disponemos de un amplio portafolio de servicios en el área de Ingeniería Eléctrica, Electrónica, Informática, 
@@ -52,15 +58,15 @@ const Home = () => {
                         </p>
                     </motion.div>
 
-                    <motion.div {...fadeInRight} className="service-carousel">
+                    <motion.div {...useFadeInRight()} className="service-carousel">
                         <Carousel images={[img1, img2, img3]} interval={3000} />
                     </motion.div>
                 </section>
 
                 {/* Quiénes somos */}
                 <section className="home-about bg-dots-pattern-2">
-                    <motion.img {...slideRotateLeft} src={industrialImg} alt="Industria moderna" className="about-img-left" />
-                    <motion.div {...fadeInRight} className="about-text-bg">
+                    <motion.img {...useSlideRotateLeft()} src={industrialImg} alt="Industria moderna" className="about-img-left" />
+                    <motion.div {...useFadeInRight()} className="about-text-bg">
                         <h2>¿Quiénes Somos?</h2>
                         <p>
                         Somos una empresa de soluciones industriales con más de 20 años de experiencia, 
@@ -83,7 +89,7 @@ const Home = () => {
                 </section>
                 {/* Proyectos Destacados */}
                 <section className="home-about bg-dots-pattern-1">
-                    <motion.div {...slideRotateLeft} className="about-text-bg">
+                    <motion.div {...useSlideRotateLeft()} className="about-text-bg">
                         <h2>Nuestros proyectos en todo Ecuador</h2>
                         <p>
                         Nuestros proyectos en todo Ecuador reflejan la esencia de Innovativa 4.0: ingeniería avanzada, transformación digital y compromiso con 
@@ -94,7 +100,7 @@ const Home = () => {
                         Ir a proyectos destacados
                         </Link>
                     </motion.div>
-                    <motion.img {...slideRotateRight} src={ecuadorImg} alt="Industria moderna" className="map-img-right" />
+                    <motion.img {...useSlideRotateRight()} src={ecuadorImg} alt="Industria moderna" className="map-img-right" />
                 </section>
                 <section className="home-section">
                     <TrustedCompanies setIsLoading={setLoading}/>

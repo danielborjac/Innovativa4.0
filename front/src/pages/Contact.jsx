@@ -8,7 +8,7 @@ import banner from "../assets/contact/contact-banner.jpg";
 import Banner from "../components/Banner";
 import { useState } from "react";
 import Spinner from "../components/Spinner";
-import { fadeInDown, fadeInUp, hover3D, slideRotateLeft} from "../utils/motionConfig";
+import { useFadeInDown, useFadeInUp, hover3D} from "../utils/motionConfig";
 import { sendContactMessage } from "../api/contact";
 
 const Contact = () => {
@@ -91,14 +91,14 @@ const Contact = () => {
             <img src={banner} alt="home" />
             <Banner/>
             <div className="banner-content">
-                <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">CONTACTA CON NOSOTROS</motion.h1>
+                <motion.h1 {...hover3D} className="banner-title">CONTACTA CON NOSOTROS</motion.h1>
             </div>
         </section>   
         <section className="contacto-section" style={{ backgroundImage: `url(${team})` }}>
             <div className="contacto-overlay">
                 {/* --- Sección de información --- */}
                 <section className="contacto-info">
-                    <motion.div {...fadeInUp}>
+                    <motion.div {...useFadeInUp()}>
                         <h2>¿TIENES ALGUNA PREGUNTA?</h2>
                         <h3>¡TE RESPONDEREMOS EN BREVEDAD!</h3>
                         <div className="info-item horario">
@@ -106,7 +106,7 @@ const Contact = () => {
                             <p>Lunes a Viernes: 08h00 - 19h00</p>
                         </div>
                     </motion.div>
-                    <motion.div {...fadeInDown}>
+                    <motion.div {...useFadeInDown()}>
                         <div className="info-data"><FaPhoneAlt /> <p>+593 988 475 968</p></div>
                         <div className="info-data"><FaEnvelope /> <p>ingenieria@innovativa40.com</p></div>
                         <div className="info-data"><FaMapMarkerAlt /> <p>2VP4+QV6, Chile, Cayambe - Ecuador</p></div>

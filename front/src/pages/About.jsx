@@ -8,7 +8,14 @@ import vision from "../assets/vision.jpg";
 import mision from "../assets/mision.jpg";
 import valores from "../assets/values.jpg";
 import "./About.css";
-import { fadeInUp, fadeInDown, fadeInLeft, fadeInRight, fadeInZoom, slideRotateRight, slideRotateLeft,  blurReveal, hover3D, staggerContainer, fadeItem } from "../utils/motionConfig";
+import {
+  useFadeInUp,
+  useFadeInDown,
+  useFadeInLeft,
+  useFadeInRight,
+  hover3D,
+  useSlideRotateRight,
+} from "../utils/motionConfig";
 import Spinner from "../components/Spinner";
 import TrustedCompanies from "../components/TrustedCompanies";
 
@@ -26,13 +33,13 @@ const About = () => {
           <img src={aboutBanner} alt="Equipo Innovativa" />
           <Banner/>
           <div className="banner-content">
-              <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">SOBRE NOSOTROS</motion.h1>
+              <motion.h1 {...hover3D} className="banner-title">SOBRE NOSOTROS</motion.h1>
           </div>
         </section>
 
         {/* Sección: Texto + imagen alternada */}
         <section className="about-main bg-dots-pattern-1">
-          <motion.div {...fadeInLeft} className="about-text">
+          <motion.div {...useFadeInLeft()} className="about-text">
             <h2>Innovación y compromiso industrial</h2>
             <p>
               En <strong>INNOVATIVA-40 S.A.S.</strong> nos especializamos en diseñar y ejecutar
@@ -46,11 +53,11 @@ const About = () => {
             </p>
           </motion.div>
 
-          <motion.img {...slideRotateRight} src={teamImg} alt="Equipo de trabajo" className="about-img" />
+          <motion.img {...useSlideRotateRight()} src={teamImg} alt="Equipo de trabajo" className="about-img" />
         </section>
 
         {/* Cita destacada */}
-        <motion.section {...fadeInUp} className="about-quote">
+        <motion.section {...useFadeInUp()} className="about-quote">
           <blockquote>
             “Nos encantaría tener una entrevista personal para conocer sus expectativas y desarrollar juntos una estrategia que le permita obtener mayor rentabilidad.”
           </blockquote>
@@ -59,7 +66,7 @@ const About = () => {
         <motion.section className="about-mission-vision bg-dots-pattern-1">
           <motion.div className="mv-container">
             {/* Tarjeta: Misión */}
-            <motion.div {...fadeInLeft} className="mv-card">
+            <motion.div {...useFadeInLeft()} className="mv-card">
               <div className="mv-inner">
                 <div
                   className="mv-front"
@@ -81,7 +88,7 @@ const About = () => {
             </motion.div>
 
             {/* Tarjeta: Visión */}
-            <motion.div {...fadeInRight} className="mv-card">
+            <motion.div {...useFadeInRight()} className="mv-card">
               <div className="mv-inner">
                 <div
                   className="mv-front"
@@ -112,9 +119,9 @@ const About = () => {
               data-aos="fade-right"
               data-aos-duration="1000"
             >
-              <motion.h2 {...fadeInDown}>Valores Corporativos</motion.h2>
+              <motion.h2 {...useFadeInDown()}>Valores Corporativos</motion.h2>
 
-              <motion.div {...fadeInUp} className="value-item">
+              <motion.div {...useFadeInUp()} className="value-item">
                 <span className="value-dot-line"></span>
                 <h3>Innovación</h3>
                 <p>
@@ -123,7 +130,7 @@ const About = () => {
                 </p>
               </motion.div>
 
-              <motion.div {...fadeInUp} className="value-item">
+              <motion.div {...useFadeInUp()} className="value-item">
                 <span className="value-dot-line"></span>
                 <h3>Excelencia Técnica</h3>
                 <p>
@@ -132,7 +139,7 @@ const About = () => {
                 </p>
               </motion.div>
 
-              <motion.div {...fadeInUp} className="value-item">
+              <motion.div {...useFadeInUp()} className="value-item">
                 <span className="value-dot-line"></span>
                 <h3>Compromiso</h3>
                 <p>
@@ -141,7 +148,7 @@ const About = () => {
                 </p>
               </motion.div>
 
-              <motion.div {...fadeInUp} className="value-item">
+              <motion.div {...useFadeInUp()} className="value-item">
                 <span className="value-dot-line"></span>
                 <h3>Trabajo en Equipo</h3>
                 <p>
@@ -150,7 +157,7 @@ const About = () => {
                 </p>
               </motion.div>
 
-              <motion.div {...fadeInUp} className="value-item">
+              <motion.div {...useFadeInUp()} className="value-item">
                 <span className="value-dot-line"></span>
                 <h3>Sostenibilidad</h3>
                 <p>
@@ -159,7 +166,7 @@ const About = () => {
                 </p>
               </motion.div>
 
-              <motion.div {...fadeInUp} className="value-item">
+              <motion.div {...useFadeInUp()} className="value-item">
                 <span className="value-dot-line"></span>
                 <h3>Seguridad y Cumplimiento</h3>
                 <p>
@@ -168,7 +175,7 @@ const About = () => {
                 </p>
               </motion.div>
 
-              <motion.div {...fadeInUp} className="value-item">
+              <motion.div {...useFadeInUp()} className="value-item">
                 <span className="value-dot-line"></span>
                 <h3>Orientación al Cliente</h3>
                 <p>
@@ -179,7 +186,7 @@ const About = () => {
             </div>
 
             {/* Columna derecha (imagen) */}
-            <motion.div {...fadeInRight} className="values-image">
+            <motion.div {...useFadeInRight()} className="values-image">
               <img src={valores} alt="Valores Corporativos" />
             </motion.div>
           </div>

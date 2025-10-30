@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./TrustedCompanies.css";
 import { motion } from "framer-motion";
-import { fadeInUp, fadeInDown } from "../utils/motionConfig";
+import { useFadeInUp} from "../utils/motionConfig";
 import { getAllCompanies } from "../api/companies";
 
 // Logos locales (para modo fallback)
@@ -96,11 +96,11 @@ const TrustedCompanies = ({ setIsLoading }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <motion.div {...fadeInDown}>
+      <div>
         <h2>Empresas que han confiado en nosotros</h2>
-      </motion.div>
+      </div>
 
-      <motion.div {...fadeInUp}>
+      <motion.div {...useFadeInUp()}>
         <div className="trusted-carousel">
           <div className="trusted-track">
             {loopCompanies.map((company, index) => (

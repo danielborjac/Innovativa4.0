@@ -1,6 +1,6 @@
 /* Sección principal */
 .about-main {
-  overflow-x: hidden;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
@@ -67,6 +67,7 @@
 }
 
 .mv-container {
+  overflow: hidden;
   display: flex;
   gap: 3rem;
   flex-wrap: wrap;
@@ -210,6 +211,7 @@
 
 /* Imagen derecha */
 .values-image img {
+  overflow: hidden;
   width: 100%;
   border-radius: 16px;
 }
@@ -247,6 +249,7 @@
   .values-grid {
     grid-template-columns: 1fr;
     text-align: left;
+    overflow: hidden;
   }
 
   .values-text {

@@ -8,7 +8,7 @@ import ref from "../assets/projects/proyecto-refineria.jpg";
 import pes from "../assets/projects/proyecto-pesquero.jpg";
 import banner from "../assets/projects/proyectos-banner.jpg";
 import {
-  fadeInUp,
+  useFadeInUp,
   staggerContainer,
   fadeItem,
   hover3D,
@@ -76,6 +76,7 @@ const Projects = () => {
   const [proyectos, setProyectos] = useState([]);
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [loading, setLoading] = useState(true);
+  const fadeInUp = useFadeInUp();
 
   const navigate = useNavigate();
 
@@ -112,7 +113,7 @@ const Projects = () => {
               <img src={banner} alt="proyectos" />
               <Banner/>
               <div className="banner-content">
-                  <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">PROYECTOS DESTACADOS</motion.h1>
+                  <motion.h1 {...hover3D} className="banner-title">PROYECTOS DESTACADOS</motion.h1>
               </div>
           </section>
           <section className="proyectos-section">
@@ -202,7 +203,6 @@ const Projects = () => {
               </motion.h3>
               <motion.p
                 {...fadeInUp}
-                transition={{ delay: 0.2 }}
                 className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8"
               >
                 Al ponerte en contacto con nuestro equipo, accederás a soluciones
@@ -211,7 +211,6 @@ const Projects = () => {
               </motion.p>
               <motion.button
                 {...fadeInUp}
-                transition={{ delay: 0.3 }}
                 onClick={() => navigate("/contacto")}
                 className="btn-orange"
               >

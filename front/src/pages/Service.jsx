@@ -6,9 +6,6 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Service.css";
 import {
-  fadeInUp,
-  fadeInLeft,
-  fadeInRight,
   staggerContainer,
   fadeItem,
   hover3D,
@@ -160,10 +157,8 @@ const Service = () => {
   const [loading, setLoading] = useState(true);
   setTimeout(() => setLoading(false), 200);
 
-
   useEffect(() => {
     if (window.innerWidth > 900) { // no aplica para movil
-      console.log("xd");
       let mounted = true;
       const imgs = Array.from(document.querySelectorAll(".section-img"));
 
@@ -265,7 +260,7 @@ const Service = () => {
           <img src={service.bannerImg} alt={service.title} />
           <Banner/>
           <div className="banner-content">
-              <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">{service.title}</motion.h1>
+              <motion.h1 {...hover3D} className="banner-title">{service.title}</motion.h1>
           </div>
         </section>
 
@@ -280,12 +275,12 @@ const Service = () => {
               <motion.div
                 className="section-img-wrapper"
                 key="img"
-                variants={fadeInLeft}
-                initial="initial"
-                whileInView="whileInView"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="show"
                 viewport={{ once: true, amount: 0.25 }}
               >
-                <img src={sec.img} alt={sec.subtitle} className="section-img" />
+                <motion.img variants={fadeItem} src={sec.img} alt={sec.subtitle} className="section-img" />
               </motion.div>
             );
 
