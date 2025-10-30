@@ -16,6 +16,7 @@ import ContactPage from "../pages/admin/ContactPage";
 import UsersPage from "../pages/admin/UsersPage";
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import CompaniesPage from "../pages/admin/CompaniesPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
       <Route path="/alianzas/:AllianceId" element={<AcademicAlliance />} />
       <Route path="/proyectos" element={<Projects />} />
       <Route path="/contacto" element={<Contact />} />
+      <Route path="*" element={<NotFoundPage />} />
 
       {/* Login */}
       <Route path="/login" element={<LoginPage />} />

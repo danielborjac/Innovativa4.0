@@ -138,32 +138,6 @@ p {
   margin-top: 50px
 }
 
-.alter-banner {
-  position: relative;
-  height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.alter-banner img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(70%);
-}
-
-.alter-banner h1 {
-  position: relative;
-  color: white;
-  font-size: 3rem;
-  font-weight: 700;
-  text-align: center;
-}
-
 .items-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -261,17 +235,10 @@ p {
 
 @media(max-width: 900px) {
   p {
-    font-size: 1em;
+    font-size: 0.9em;
   }
   h2 {
-    font-size: 1.7rem;
-  }
-  .alter-banner h1{
     font-size: 2rem;
-    margin: 10px
-  }
-  .alter-banner{
-    height: 40vh;
   }
   h3 {
     font-size: 1.3rem;
@@ -286,10 +253,34 @@ p {
     grid-template-columns: 1fr;
   }
   .banner-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .banner-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+}
+
+@media(min-width: 901px) and (max-width: 1377px){
+  p {
+    font-size: 1em;
+  }
+  h2 {
+    font-size: 2.3rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4{
+    font-size: 1.3rem;
+  }
+  h5{
+    font-size: 1.3rem;
+  }
+  .banner-title {
+    font-size: 2.3rem;
+  }
+  .banner-subtitle {
+    font-size: 1.2rem;
   }
 }

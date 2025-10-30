@@ -37,7 +37,7 @@
 
 .proyecto-card img {
   width: 100%;
-  height: 320px;
+  height: 350px;
   object-fit: cover;
 }
 
@@ -158,5 +158,18 @@
     }
     .contact-cta-overlay {
       padding: 3rem 1.5rem;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1377px){
+    .proyectos-grid {
+        gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+    }
+    .modal-image {
+      height: 190px;
+    }
+    .proyecto-card img {
+      object-fit: cover;
     }
 }

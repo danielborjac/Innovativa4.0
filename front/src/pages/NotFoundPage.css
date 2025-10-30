@@ -1,0 +1,26 @@
+.section-error{
+  text-align: center;
+  padding: 8rem 2rem;
+}
+
+.section-error .error{
+  font-size: 150px;
+  color: var(--primary-text-color);
+  text-shadow: 
+    1px 1px 1px var(--text-color),    
+    2px 2px 1px var(--text-color),
+    3px 3px 1px var(--text-color),
+    4px 4px 1px var(--text-color),
+    5px 5px 1px var(--text-color),
+    6px 6px 1px var(--text-color),
+    7px 7px 1px var(--text-color),
+    8px 8px 1px var(--text-color),
+    25px 25px 8px rgba(0,0,0, 0.2);
+}
+
+.page-error{
+  margin: 2rem 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #444;
+}
