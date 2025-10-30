@@ -60,7 +60,7 @@
   cursor: pointer;
 }
 
-.modal-overlay {
+.modal-companies-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -72,19 +72,19 @@
   align-items: center;
 }
 
-.modal-content {
+.modal-companies-content {
   background: white;
   padding: 25px;
   border-radius: 10px;
   width: 400px;
 }
 
-.modal-content form {
+.modal-companies-content form {
   display: flex;
   flex-direction: column;
 }
 
-.modal-content label {
+.modal-companies-content label {
   margin-top: 10px;
   margin-bottom: 5px;
 }
@@ -106,8 +106,8 @@
 }
 
 /* ======= Inputs mejorados ======= */
-.modal-content input[type="text"],
-.modal-content input[type="file"] {
+.modal-companies-content input[type="text"],
+.modal-companies-content input[type="file"] {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -117,7 +117,7 @@
   transition: border-color 0.2s;
 }
 
-.modal-content input:focus {
+.modal-companies-content input:focus {
   border-color: #0077cc;
   outline: none;
 }

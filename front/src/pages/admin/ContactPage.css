@@ -95,7 +95,7 @@
   background: #004195;
 }
 
-.modal-overlay {
+.modal-contact-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
@@ -104,7 +104,7 @@
   align-items: center;
 }
 
-.modal-content {
+.modal-contact-content {
   background: white;
   padding: 2rem;
   border-radius: 12px;
@@ -113,15 +113,15 @@
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
 }
 
-.modal-content h3 {
+.modal-contact-content h3 {
   margin-bottom: 1rem;
 }
 
-.modal-content p {
+.modal-contact-content p {
   margin-bottom: 0.6rem;
 }
 
-.modal-content button {
+.modal-contact-content button {
   background: #d9534f;
   color: white;
   border: none;

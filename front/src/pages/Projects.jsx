@@ -77,14 +77,12 @@ const Projects = () => {
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const handleParticlesLoaded = () => {
-        // Espera un momento adicional para una transición más suave
-        setTimeout(() => setLoading(false), 200);
-  };
-
   const navigate = useNavigate();
 
   useEffect(() => {
+    
+    setLoading(true);
+
     const fetchProjects = async () => {
       try {
         const data = await getProjects();
@@ -112,9 +110,10 @@ const Projects = () => {
         <>
           <section className="banner">
               <img src={banner} alt="proyectos" />
-              <Banner onParticlesLoaded={handleParticlesLoaded}>
+              <Banner/>
+              <div className="banner-content">
                   <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">PROYECTOS DESTACADOS</motion.h1>
-              </Banner>
+              </div>
           </section>
           <section className="proyectos-section">
             <div className="proyectos-header">

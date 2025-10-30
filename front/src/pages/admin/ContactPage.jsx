@@ -113,8 +113,8 @@ const ContactPage = () => {
 
       {/* Modal */}
       {selectedContact && (
-        <div className="modal-overlay" onClick={() => setSelectedContact(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-contact-overlay" onClick={() => setSelectedContact(null)}>
+          <div className="modal-contact-content" onClick={(e) => e.stopPropagation()}>
             <h3>Detalle del Contacto</h3>
             <p><strong>Nombre:</strong> {selectedContact.first_name} {selectedContact.last_name}</p>
             <p><strong>Empresa:</strong> {selectedContact.company || "-"}</p>

@@ -20,12 +20,7 @@ import AcademicAlliances from "../components/AcademicAlliances";
 
 const Home = () => {
 
-    const [loading, setLoading] = useState(true);
-
-    const handleParticlesLoaded = () => {
-        // Espera un momento adicional para una transición más suave
-        setTimeout(() => setLoading(false), 700);
-    };
+    const [loading, setLoading] = useState(false);
 
     return (
         <>
@@ -35,10 +30,11 @@ const Home = () => {
                 {/* Banner hero */}
                 <section className="banner">
                     <img src={banner} alt="home" />
-                    <Banner onParticlesLoaded={handleParticlesLoaded}>
+                    <Banner/>
+                    <div className="banner-content">
                         <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">SOLUCIONES INDUSTRIALES INNOVADORAS</motion.h1>
                         <motion.p {...fadeInDown} {...hover3D} className="banner-subtitle">Más de 20 años optimizando la eficiencia operativa y energética.</motion.p>
-                    </Banner>
+                    </div>
                 </section>
 
                 {/* Sección: Servicios principales alternados */}
@@ -101,7 +97,7 @@ const Home = () => {
                     <motion.img {...slideRotateRight} src={ecuadorImg} alt="Industria moderna" className="map-img-right" />
                 </section>
                 <section className="home-section">
-                    <TrustedCompanies />
+                    <TrustedCompanies setIsLoading={setLoading}/>
                 </section>          
             </div>
         </>

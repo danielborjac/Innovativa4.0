@@ -78,10 +78,17 @@ const CompaniesPage = () => {
     }
   };
 
+  const CreateCompany = () => {
+    setEditingCompany(null);
+    setImageFile(null);
+    setFormData({ name: "", logo: "" });
+    setShowModal(true);
+  }
+
   return (
     <div className="companies-container">
       <h2>Empresas que confían en nosotros</h2>
-      <button className="btn-primary" onClick={() => setShowModal(true)}>
+      <button className="btn-primary" onClick={() => CreateCompany()}>
         + Nueva Empresa
       </button>
 
@@ -126,8 +133,8 @@ const CompaniesPage = () => {
       )}
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="modal-companies-overlay">
+          <div className="modal-companies-content">
             <h3>{editingCompany ? "Editar Empresa" : "Nueva Empresa"}</h3>
             <form onSubmit={handleSubmit}>
               <label>Nombre:</label>

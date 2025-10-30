@@ -88,6 +88,14 @@ export default function UsersPage() {
 
   const NewUser = () => {
     setEditingUser(null);
+    setFormData({
+      email: "",
+      password: "",
+      first_name: "",
+      last_name: "",
+      role: "editor",
+      is_active: true,
+    });
     setShowModal(true);
 
   }
@@ -168,8 +176,8 @@ export default function UsersPage() {
 
       {/* Modal */}
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="modal-user-overlay">
+          <div className="modal-user-content">
             <h3>{editingUser ? "Editar Usuario" : "Nuevo Usuario"}</h3>
             <form onSubmit={handleSubmit}>
               <input

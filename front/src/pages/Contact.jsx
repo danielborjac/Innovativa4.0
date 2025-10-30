@@ -15,10 +15,7 @@ const Contact = () => {
 
     const [loading, setLoading] = useState(true);
 
-    const handleParticlesLoaded = () => {
-        // Espera un momento adicional para una transición más suave
-        setTimeout(() => setLoading(false), 300);
-    };
+    setTimeout(() => setLoading(false), 300);
     
     const [formData, setFormData] = useState({
         first_name: "",
@@ -92,9 +89,10 @@ const Contact = () => {
 
         <section className="banner">
             <img src={banner} alt="home" />
-            <Banner onParticlesLoaded={handleParticlesLoaded}>
+            <Banner/>
+            <div className="banner-content">
                 <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">CONTACTA CON NOSOTROS</motion.h1>
-            </Banner>
+            </div>
         </section>   
         <section className="contacto-section" style={{ backgroundImage: `url(${team})` }}>
             <div className="contacto-overlay">
@@ -119,7 +117,7 @@ const Contact = () => {
                         </div>
                     </motion.div>
                 </section>
-                <motion.section className="contacto-container" {...slideRotateLeft}>
+                <section className="contacto-container">
                     {/* --- Formulario de contacto --- */}
                     <div className="contacto-formulario">
                         <form onSubmit={handleSubmit}>
@@ -205,7 +203,7 @@ const Contact = () => {
                             </button>
                         </form>
                     </div>
-                </motion.section>
+                </section>
             </div>
         </section>
         <section>

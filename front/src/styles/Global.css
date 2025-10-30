@@ -64,35 +64,6 @@ p {
   font-size: 1.2em;
 }
 
-@media(max-width: 900px) {
-  p {
-    font-size: 1em;
-  }
-  h2 {
-    font-size: 1.7rem;
-  }
-  .alter-banner h1{
-    font-size: 2rem;
-    margin: 10px
-  }
-  .alter-banner{
-    height: 40vh;
-  }
-  h3 {
-    font-size: 1.3rem;
-  }
-  h4{
-    font-size: 1.2rem;
-  }
-  h5{
-    font-size: 1.2rem;
-  }
-  .items-grid {
-    grid-template-columns: 1fr;
-  }
-  
-}
-
 .banner {
   transition: opacity 2s ease-in-out;
   position: relative;
@@ -110,6 +81,40 @@ p {
   object-fit: cover;
   opacity: 0.15;
   filter: brightness(70%);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+  padding: 0 2rem;
+  height: 50vh;
+  align-content: center;
+}
+
+.banner-title {
+  font-size: 3rem;
+  font-weight: bolder;
+}
+
+.banner-subtitle {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Nuevo estilo para el contenedor de partículas */
+.particles-container {
+    position: absolute; /* Posicionamiento sobre el banner */
+    inset: 0; /* Ocupa todo el espacio del .banner */
+    width: 100%;
+    height: 100%;
+    /* Muy importante: z-index para que quede detrás del contenido (z-index: 10) 
+       pero encima de la imagen (z-index: 0 o 1) */
+    z-index: 5; 
 }
 
 .btn-orange {
@@ -252,4 +257,39 @@ p {
   background-size: 100% 100%;
   position: relative;
   z-index: 0;
+}
+
+@media(max-width: 900px) {
+  p {
+    font-size: 1em;
+  }
+  h2 {
+    font-size: 1.7rem;
+  }
+  .alter-banner h1{
+    font-size: 2rem;
+    margin: 10px
+  }
+  .alter-banner{
+    height: 40vh;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+  h4{
+    font-size: 1.2rem;
+  }
+  h5{
+    font-size: 1.2rem;
+  }
+  .items-grid {
+    grid-template-columns: 1fr;
+  }
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1.1rem;
+  }
 }

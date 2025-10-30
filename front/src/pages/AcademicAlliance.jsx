@@ -49,10 +49,7 @@ const AcademicAlliance = () => {
   const Alliance = allianceData[AllianceId];
 
     const [loading, setLoading] = useState(true);
-    const handleParticlesLoaded = () => {
-          // Espera un momento adicional para una transición más suave
-          setTimeout(() => setLoading(false), 200);
-    };
+    setTimeout(() => setLoading(false), 200);
 
   return (
     <>
@@ -61,9 +58,10 @@ const AcademicAlliance = () => {
         
             <section className="banner">
                 <img src={banner} alt="europea" />
-                <Banner onParticlesLoaded={handleParticlesLoaded}>
+                <Banner/>
+                <div className="banner-content">
                     <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">{Alliance.title.toUpperCase()}</motion.h1>
-                </Banner>
+                </div>
             </section>
 
             <section className="alliance-info">

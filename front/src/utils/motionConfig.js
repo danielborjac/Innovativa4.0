@@ -1,12 +1,6 @@
-// MotionConfig.js
-// ⚡ Efectos de animación optimizados con Framer Motion
-// Incluye variantes responsivas, suaves y overflow-safe
-
-const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-
 // 🔹 Fade hacia arriba (adaptativo)
 export const fadeInUp = {
-  initial: { opacity: 0, y: isMobile ? 60 : 150 },
+  initial: { opacity: 0, y: 150 },
   whileInView: { opacity: 1, y: 0 },
   transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
   viewport: { once: true }, 
@@ -14,7 +8,7 @@ export const fadeInUp = {
 
 // 🔹 Fade hacia abajo
 export const fadeInDown = {
-  initial: { opacity: 0, y: isMobile ? -60 : -150 },
+  initial: { opacity: 0, y: -150 },
   whileInView: { opacity: 1, y: 0 },
   transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
   viewport: { once: true }, 
@@ -22,7 +16,7 @@ export const fadeInDown = {
 
 // 🔹 Fade lateral izquierda con blur suave (overflow-safe)
 export const fadeInLeft = {
-  initial: { opacity: 0, x: isMobile ? -80 : -200, filter: "blur(6px)" },
+  initial: { opacity: 0, x: -200, filter: "blur(6px)" },
   whileInView: { opacity: 1, x: 0, filter: "blur(0px)" },
   transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
   viewport: { once: true }, 
@@ -30,7 +24,7 @@ export const fadeInLeft = {
 
 // 🔹 Fade lateral derecha con blur
 export const fadeInRight = {
-  initial: { opacity: 0, x: isMobile ? 80 : 200, filter: "blur(6px)" },
+  initial: { opacity: 0, x: 200, filter: "blur(6px)" },
   whileInView: { opacity: 1, x: 0, filter: "blur(0px)" },
   transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
   viewport: { once: true }, 
@@ -46,14 +40,14 @@ export const fadeInZoom = {
 
 // 🔹 Efecto Slide & Rotate (para imágenes o cards grandes)
 export const slideRotateRight = {
-  initial: { opacity: 0, x: isMobile ? 150 : 300, rotate: 8 },
+  initial: { opacity: 0, x: 300, rotate: 8 },
   whileInView: { opacity: 1, x: 0, rotate: 0 },
   transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
   viewport: { once: true }, 
 };
 
 export const slideRotateLeft = {
-  initial: { opacity: 0, x: isMobile ? -150 : -300, rotate: -8 },
+  initial: { opacity: 0, x: -300, rotate: -8 },
   whileInView: { opacity: 1, x: 0, rotate: 0 },
   transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
   viewport: { once: true }, 

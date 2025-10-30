@@ -38,7 +38,7 @@ app.use(cors({
 // 3️⃣ Rate limiting — evita ataques de fuerza bruta
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 100,
+  max: 150,
   message: { error: 'Demasiadas solicitudes desde esta IP. Intenta más tarde.' },
 });
 app.use('/api/', limiter);

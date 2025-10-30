@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import "./TrustedCompanies.css";
 import { motion } from "framer-motion";
 import { fadeInUp, fadeInDown } from "../utils/motionConfig";
-import { getAllCompanies } from "../api/companies"; // 🔹 Asegúrate de tener este import correcto
+import { getAllCompanies } from "../api/companies";
 
-// 🧩 Logos locales (para modo fallback)
+// Logos locales (para modo fallback)
 import holandesa from "../assets/company/Holandesa.png";
 import Universae from "../assets/company/Universae.png";
 import Terranostra from "../assets/company/Terranostra.png";
@@ -18,7 +18,7 @@ import Alinatura from "../assets/company/Alinatura.png";
 import CTI from "../assets/company/CTI.png";
 import ordeno from "../assets/company/ordeno.png";
 
-// 🔹 Datos mockeados (fallback)
+// Datos mockeados (fallback)
 const mockCompanies = [
   { id: 1, name: "Rey lácteos", logo: reylacteos },
   { id: 2, name: "LA holandesa", logo: holandesa },
@@ -33,16 +33,24 @@ const mockCompanies = [
   { id: 12, name: "El Ordeño", logo: ordeno },
 ];
 
-const TrustedCompanies = () => {
+const TrustedCompanies = ({ setIsLoading }) => {
   const [companies, setCompanies] = useState([]);
   const [paused, setPaused] = useState(false);
   const [delay, setDelay] = useState(false);
 
-  // 🔹 Cargar datos desde el backend
+
   useEffect(() => {
+
+    setIsLoading(true);
+    
+    const timeoutId = setTimeout(() => {
+        window.location.reload(); // Función para recargar la página
+    }, 20000);
+
     const fetchCompanies = async () => {
       try {
         const res = await getAllCompanies();
+        clearTimeout(timeoutId);
         if (res.ok && Array.isArray(res.data) && res.data.length > 0) {
           setCompanies(res.data);
         } else {
@@ -50,12 +58,19 @@ const TrustedCompanies = () => {
           setCompanies(mockCompanies);
         }
       } catch (error) {
+        clearTimeout(timeoutId);
         console.error("❌ Error al cargar compañías:", error);
         setCompanies(mockCompanies);
+      } finally {
+          setIsLoading(false);
       }
     };
     fetchCompanies();
-  }, []);
+
+    return () => {
+        clearTimeout(timeoutId);
+    };
+  }, [setIsLoading]);
 
   // 🔹 Control de pausa del carrusel
   useEffect(() => {

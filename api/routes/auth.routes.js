@@ -8,7 +8,7 @@ const userController = require('../controllers/user.controller');
 
 const limiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 10,
+  max: 100,
   message: { ok: false, message: 'Too many requests' }
 });
 

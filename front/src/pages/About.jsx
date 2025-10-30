@@ -14,10 +14,6 @@ import TrustedCompanies from "../components/TrustedCompanies";
 
 const About = () => {
     const [loading, setLoading] = useState(true);
-    const handleParticlesLoaded = () => {
-          // Espera un momento adicional para una transición más suave
-          setTimeout(() => setLoading(false), 200);
-    };
   
 
   return (
@@ -25,16 +21,13 @@ const About = () => {
       {loading && <Spinner />}
       <div className="about">
         {/* Banner */}
-        {/*<section className="alter-banner">
-          <img src={aboutBanner} alt="Equipo Innovativa" />
-          <motion.h1 {...fadeInUp}>SOBRE NOSOTROS</motion.h1>
-        </section>*/}
 
         <section className="banner">
           <img src={aboutBanner} alt="Equipo Innovativa" />
-          <Banner onParticlesLoaded={handleParticlesLoaded}>
+          <Banner/>
+          <div className="banner-content">
               <motion.h1 {...fadeInUp} {...hover3D} className="banner-title">SOBRE NOSOTROS</motion.h1>
-          </Banner>
+          </div>
         </section>
 
         {/* Sección: Texto + imagen alternada */}
@@ -192,7 +185,7 @@ const About = () => {
           </div>
         </section>
         <section className="home-section">
-          <TrustedCompanies />
+          <TrustedCompanies setIsLoading={setLoading}/>
         </section>
       </div>
     </>

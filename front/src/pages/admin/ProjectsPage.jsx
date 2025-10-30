@@ -19,15 +19,19 @@ const ProjectsPage = () => {
   });
   const [editingProject, setEditingProject] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingProjects, setLoadingProjects] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState("");
 
   const fetchProjects = async () => {
     try {
+      setLoadingProjects(true);
       const data = await getProjects();
       setProjects(data);
     } catch (err) {
       console.error("Error cargando proyectos:", err);
+    } finally {
+      setLoadingProjects(false);
     }
   };
 
@@ -99,106 +103,138 @@ const ProjectsPage = () => {
     }
   };
 
+  const CreateProject = () => {
+    setEditingProject(null);
+    setFormData({
+      titulo: "",
+      descripcionCorta: "",
+      imagen: "",
+      impacto: "",
+      detalles: "",
+    });
+    setShowForm(!showForm);
+  }
+
   return (
     <div className="projects-admin">
       <div className="projects-header">
         <h2>Gestión de Proyectos</h2>
-        <button className="btn-primary" onClick={() => setShowForm(!showForm)}>
-          {showForm ? "Cancelar" : "Nuevo Proyecto"}
+        <button className="btn-primary" onClick={() => CreateProject()}>
+          {showForm ? "Cancelar" : "+ Nuevo Proyecto"}
         </button>
       </div>
 
       {message && <p className="message">{message}</p>}
 
       {showForm && (
-        <form className="project-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="titulo"
-            placeholder="Título del proyecto"
-            value={formData.titulo}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="descripcionCorta"
-            placeholder="Descripción corta"
-            value={formData.descripcionCorta}
-            onChange={handleChange}
-            required
-          />
-          <label className="image-label">
-            Imagen del proyecto:
-            <input
-              type="file"
-              accept="image/*"
-              onChange={async (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                try {
-                  setMessage("Subiendo imagen...");
-                  const { uploadImageToCloudinary } = await import("../../utils/uploadImageToCloudinary");
-                  const imageUrl = await uploadImageToCloudinary(file);
-                  setFormData((prev) => ({ ...prev, imagen: imageUrl }));
-                  setMessage("Imagen subida correctamente ✅");
-                } catch (err) {
-                  console.error(err);
-                  setMessage("Error al subir la imagen ❌");
-                }
-              }}
-            />
-          </label>
+        <div className="modal-project-overlay" onClick={() => setShowForm(false)}>
+          <div
+            className="modal-project-content"
+            onClick={(e) => e.stopPropagation()} // evita cerrar al hacer click dentro
+          >
+            <h3>{editingProject ? "Editar Proyecto" : "Nuevo Proyecto"}</h3>
 
-          {formData.imagen && (
-            <div className="preview-image">
-              <img src={formData.imagen} alt="Previsualización" />
-            </div>
-          )}
-          <textarea
-            name="detalles"
-            placeholder="Detalles (uno por línea)"
-            value={formData.detalles}
-            onChange={handleChange}
-            rows="5"
-          />
-          <textarea
-            name="impacto"
-            placeholder="Impacto del proyecto"
-            value={formData.impacto}
-            onChange={handleChange}
-            rows="3"
-          />
+            <form className="project-form" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="titulo"
+                placeholder="Título del proyecto"
+                value={formData.titulo}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="descripcionCorta"
+                placeholder="Descripción corta"
+                value={formData.descripcionCorta}
+                onChange={handleChange}
+                required
+              />
 
-          <button type="submit" className="btn-save" disabled={loading}>
-            {loading ? "Guardando..." : editingProject ? "Actualizar" : "Crear"}
-          </button>
-        </form>
+              <label className="image-label">
+                Imagen del proyecto:
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    try {
+                      setMessage("Subiendo imagen...");
+                      const { uploadImageToCloudinary } = await import("../../utils/uploadImageToCloudinary");
+                      const imageUrl = await uploadImageToCloudinary(file);
+                      setFormData((prev) => ({ ...prev, imagen: imageUrl }));
+                      setMessage("Imagen subida correctamente ✅");
+                    } catch (err) {
+                      console.error(err);
+                      setMessage("Error al subir la imagen ❌");
+                    }
+                  }}
+                />
+              </label>
+
+              {formData.imagen && (
+                <div className="preview-image">
+                  <img src={formData.imagen} alt="Previsualización" />
+                </div>
+              )}
+
+              <textarea
+                name="detalles"
+                placeholder="Detalles (uno por línea)"
+                value={formData.detalles}
+                onChange={handleChange}
+                rows="5"
+              />
+              <textarea
+                name="impacto"
+                placeholder="Impacto del proyecto"
+                value={formData.impacto}
+                onChange={handleChange}
+                rows="3"
+              />
+
+              <div className="modal-buttons">
+                <button type="button" className="btn-cancel" onClick={() => setShowForm(false)}>
+                  Cancelar
+                </button>
+                <button type="submit" className="btn-save" disabled={loading}>
+                  {loading ? "Guardando..." : editingProject ? "Actualizar" : "Crear"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
 
-      <div className="projects-list">
-        {Array.isArray(projects) && projects.length > 0 ? (
-          projects.map((p) => (
-            <div key={p.id} className="project-card">
-              <img src={p.imagen} alt={p.titulo} />
-              <div className="project-info">
-                <h4>{p.titulo}</h4>
-                <p>{p.descripcionCorta}</p>
-                <div className="project-actions">
-                  <button className="btn-edit" onClick={() => handleEdit(p)}>
-                    ✏️ Editar
-                  </button>
-                  <button className="btn-delete" onClick={() => handleDelete(p.id)}>
-                    🗑️ Eliminar
-                  </button>
+      {loadingProjects ? (
+        <p>Cargando...</p>
+      ) : (
+        <div className="projects-list">
+          {Array.isArray(projects) && projects.length > 0 ? (
+            projects.map((p) => (
+              <div key={p.id} className="project-card">
+                <img src={p.imagen} alt={p.titulo} />
+                <div className="project-info">
+                  <h4>{p.titulo}</h4>
+                  <p>{p.descripcionCorta}</p>
+                  <div className="project-actions">
+                    <button className="btn-edit" onClick={() => handleEdit(p)}>
+                      ✏️ Editar
+                    </button>
+                    <button className="btn-delete" onClick={() => handleDelete(p.id)}>
+                      🗑️ Eliminar
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <p className="no-projects">No hay proyectos disponibles</p>
-        )}
-      </div>
+            ))
+          ) : (
+            <p className="no-projects">No hay proyectos disponibles</p>
+          )}
+        </div>
+      )}  
     </div>
   );
 };
