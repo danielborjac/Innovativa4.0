@@ -131,6 +131,7 @@ p {
 .btn-orange:hover {
   background-color: #a05911;
   transform: translateY(-2px);
+  cursor: pointer;
 }
 
 

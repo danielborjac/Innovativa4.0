@@ -13,6 +13,7 @@ const contactRoutes = require('./routes/contact.routes');
 const authRoutes = require('./routes/auth.routes');
 const projectRoutes = require('./routes/project.routes');
 const companyRoutes = require('./routes/company.routes');
+const systemRoutes = require('./routes/system.routes');
 
 // Middlewares
 const errorHandler = require('./middlewares/errorHandler');
@@ -48,6 +49,8 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/users', authRoutes); // login/register/etc.
 app.use('/api/projects', projectRoutes);
 app.use('/api/companies', companyRoutes);
+// Montarlo en el prefijo /api
+app.use('/api', systemRoutes);
 
 // 5️⃣ Manejador global de errores
 app.use(errorHandler);

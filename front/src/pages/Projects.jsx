@@ -195,27 +195,24 @@ const Projects = () => {
             }}
           >
             <div className="contact-cta-overlay">
-              <motion.h3
-                {...fadeInUp}
+              <h3
                 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg"
               >
                 ¿Listo para transformar tu industria con Innovativa 4.0?
-              </motion.h3>
-              <motion.p
-                {...fadeInUp}
+              </h3>
+              <p
                 className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8"
               >
                 Al ponerte en contacto con nuestro equipo, accederás a soluciones
                 personalizadas, asesoría técnica especializada y la experiencia de
                 profesionales comprometidos con la innovación y la eficiencia.
-              </motion.p>
-              <motion.button
-                {...fadeInUp}
+              </p>
+              <button
                 onClick={() => navigate("/contacto")}
                 className="btn-orange"
               >
                 ¡Hablemos de tu proyecto!
-              </motion.button>
+              </button>
             </div>
           </section>
         </>
