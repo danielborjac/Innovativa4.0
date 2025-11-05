@@ -59,7 +59,7 @@ app.use(errorHandler);
 (async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true }); // usar migraciones en producción
+    //await sequelize.sync({ alter: true }); // usar migraciones en producción
     app.listen(config.PORT, () => {
       logger.info(`Server running on port ${config.PORT}`);
     });
