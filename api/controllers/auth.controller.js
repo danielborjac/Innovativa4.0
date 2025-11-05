@@ -24,7 +24,7 @@ async function login(req, res, next) {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.COOKIE_SECURE === 'true', // true in production with https
-      sameSite: 'lax',
+      sameSite: process.env.COOKIE_SECURE === 'true' ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000 // same as refresh ttl
     });
 
@@ -44,7 +44,7 @@ async function refresh(req, res, next) {
     res.cookie('refreshToken', newRefresh, {
       httpOnly: true,
       secure: process.env.COOKIE_SECURE === 'true',
-      sameSite: 'lax',
+      sameSite: process.env.COOKIE_SECURE === 'true' ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
@@ -74,7 +74,7 @@ async function logout(req, res, next) {
     }
 
     // clear cookie
-    res.clearCookie('refreshToken', { httpOnly: true, secure: process.env.COOKIE_SECURE === 'true', sameSite: 'lax' });
+    res.clearCookie('refreshToken', { httpOnly: true, secure: process.env.COOKIE_SECURE === 'true', sameSite: process.env.COOKIE_SECURE === 'true' ? 'none' : 'lax' });
     return res.json({ ok: true, message: 'Logged out' });
   } catch (err) {
     next(err);
