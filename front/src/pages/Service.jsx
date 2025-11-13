@@ -3,7 +3,7 @@ import React from "react";
 import Banner from "../components/Banner";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import "./Service.css";
 import {
   staggerContainer,
@@ -11,23 +11,33 @@ import {
   hover3D,
 } from "../utils/motionConfig";
 import { useEffect } from "react";
+import { useRef} from "react";
 
 import electricImg from "../assets/electrical.jpg";
 import industrialImg from "../assets/industrial.jpg";
 import trainingImg from "../assets/training.jpg";
-import extraImg1 from "../assets/service-extra1.jpg";
-import extraImg2 from "../assets/service-extra2.jpg";
-import extraImg3 from "../assets/service-extra3.jpg";
+import projectImg from "../assets/project.jpg";
+import electrica1 from "../assets/ingenieria_electrica.jpg";
+import electrica2 from "../assets/ingenieria_electrica2.jpg";
+import electrica3 from "../assets/ingenieria_electrica3.jpg";
+import ingIndustrial1 from "../assets/ingenieria-industrial1.jpg";
+import ingIndustrial2 from "../assets/ingenieria-industrial2.jpg";
+import ingIndustrial3 from "../assets/ingenieria-industrial3.jpg";
+import capacitaciones1 from "../assets/capacitaciones1.jpg";
+import capacitaciones2 from "../assets/capacitaciones2.jpg";
+import mindustrial1 from "../assets/mantenimiento-industrial1.jpg";
+import mindustrial2 from "../assets/mantenimiento-industrial2.jpg";
+
 import Spinner from "../components/Spinner";
 
 const servicesContent = {
   "ingenieria-electrica": {
-    title: "INGENIERÍA ELÉCTRICA Y ELECTRÓNICA",
+    title: "INGENIERÍA ELÉCTRICA Y AUTOMATIZACIÓN INDUSTRIAL",
     bannerImg: electricImg,
     sections: [
       {
         subtitle: "Sistemas Eléctricos",
-        img: extraImg1,
+        img: electrica1,
         items: [
           "Levantamiento de infraestructura eléctrica.",
           "Diseño de redes eléctricas en baja tensión.",
@@ -48,7 +58,7 @@ const servicesContent = {
       },
       {
         subtitle: "Automatización",
-        img: extraImg2,
+        img: electrica2,
         items: [
          "Diseño e implementación de tableros de control.",
           "Programación de PLC´s (Controladores Lógicos Programables).",
@@ -61,7 +71,7 @@ const servicesContent = {
       },
       {
         subtitle: "Programación & Mantenimiento",
-        img: extraImg3,
+        img: electrica3,
         items: [
           "Mantenimiento de PCs y servidores.",
           "Configuración de servidores de impresión y correo electrónico.",
@@ -78,7 +88,7 @@ const servicesContent = {
     sections: [
       {
         subtitle: "Medición de Estándares",
-        img: extraImg1,
+        img: ingIndustrial1,
         items: [
           "Establecimiento de estándares (tiempos requeridos) de paradas planeadas “Downtime” necesarios para el proceso productivo.",
           "Establecimiento del número de personas requeridas para el proceso productivo con el estudio de tiempos y movimientos.",
@@ -89,7 +99,7 @@ const servicesContent = {
       },
       {
         subtitle: "Medición de Eficiencias",
-        img: extraImg2,
+        img: ingIndustrial2,
         items: [
           "Levantamiento de diagramas de proceso por líneas prioritarias.",
           "Definición de equipos o líneas para medir la eficiencia y performance.",
@@ -98,7 +108,7 @@ const servicesContent = {
       },
       {
         subtitle: "Análisis de Capacidad",
-        img: extraImg3,
+        img: ingIndustrial3,
         items: [
           "Definición de líneas prioritarias para análisis de capacidad.",
           "Definición de Bottlenecks (Cuellos de Botella) para líneas prioritarias.",
@@ -112,22 +122,8 @@ const servicesContent = {
     bannerImg: trainingImg,
     sections: [
       {
-        subtitle: "Seguridad Industrial",
-        img: extraImg1,
-        items: [
-          "Prevención de riesgos laborales",
-          "Evaluación de riesgos",
-          "Comité paritario",
-          "Permisos de trabajo",
-          "Equipos de protección Personal individual y colectivo",
-          "Seguridad eléctrica",
-          "Atmósferas explosivas",
-          "Bloqueo y etiquetado",
-        ],
-      },
-      {
         subtitle: "Instrumentación & Automatización",
-        img: extraImg2,
+        img: capacitaciones1,
         items: [
           "Calibración de instrumentos de campo",
           "Programación básica de PLC, HMI, Variadores de velocidad",
@@ -137,7 +133,7 @@ const servicesContent = {
       },
       {
         subtitle: "Productividad",
-        img: extraImg3,
+        img: capacitaciones2,
         items: [
           "Resolución de problemas básicos (nivel de resolución mediante visitas a la línea de producción, establecimiento de estándares, etc.).",
           "Resolución de problemas Avanzados (Metodología DMAIC, SIX SIGMA, nivel de resolución con herramientas estadísticas).",
@@ -149,13 +145,49 @@ const servicesContent = {
       },
     ],
   },
+  "mantenimiento": {
+    title: "MANTENIMIENTO Y PROYECTOS INDUSTRIALES",
+    bannerImg: projectImg,
+    sections: [
+      {
+        subtitle: "Mantenimiento preventivo Industrial",
+        img: mindustrial1,
+        items: [
+          "Motores eléctricos.",
+          "Instrumentación industrial.",
+          "Equipos de llenado.",
+          "Equipos de proceso térmico.",
+          "Equipos transportadores.",
+          "Planta de procesos - minería.",
+        ],
+      },
+      {
+        subtitle: "Proyectos Industriales",
+        img: mindustrial2,
+        items: [
+          "Implementación de TPM en líneas de llenado.",
+          "Implementación de sistema de gestión de mantenimiento In House.",
+          "Control de peso neto.",
+          "Montaje de Andamios certificados.",
+        ],
+      },
+    ],
+  },
 };
 
 const Service = () => {
   const { serviceId } = useParams();
   const service = servicesContent[serviceId];
   const [loading, setLoading] = useState(true);
-  setTimeout(() => setLoading(false), 200);
+
+  const animationRef = useRef(null); 
+  const isInView = useInView(animationRef, { once: true, amount: 0.25 });
+
+  useEffect(() => {
+        setLoading(true);
+        const timer = setTimeout(() => setLoading(false), 300);
+        return () => clearTimeout(timer);
+    }, [serviceId]);
 
   useEffect(() => {
     if (window.innerWidth > 900) { // no aplica para movil
@@ -254,7 +286,7 @@ const Service = () => {
   return (
     <>
         {loading && <Spinner />}
-      <div className="service-page">
+      <div className="service-page" key={serviceId}>
 
         <section className="banner">
           <img src={service.bannerImg} alt={service.title} />
@@ -265,7 +297,7 @@ const Service = () => {
         </section>
 
         {/* Contenido */}
-        <div className="service-main">
+        <div className="service-main" ref={animationRef}>
           {service.sections.map((sec, idx) => {
             const isMobile= window.innerWidth < 768
             const isReverse = idx % 2 !== 0;
@@ -276,9 +308,8 @@ const Service = () => {
                 className="section-img-wrapper"
                 key="img"
                 variants={staggerContainer}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.25 }}
+                initial={loading ? false : "hidden"}
+                animate={isInView ? "show" : "hidden"}
               >
                 <motion.img variants={fadeItem} src={sec.img} alt={sec.subtitle} className="section-img" />
               </motion.div>
@@ -289,9 +320,8 @@ const Service = () => {
                 className="section-text"
                 key="text"
                 variants={staggerContainer}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.25 }}
+                initial={loading ? false : "hidden"}
+                animate={isInView ? "show" : "hidden"}
               >
                 <motion.h2 variants={fadeItem}>{sec.subtitle}</motion.h2>
 

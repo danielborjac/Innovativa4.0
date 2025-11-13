@@ -11,7 +11,7 @@ async function createContact(data) {
 
   const mailOptions = {
     from: config.FROM_EMAIL || config.SMTP.USER,
-    to: config.ADMIN_EMAIL,
+    to: `${config.ADMIN_EMAIL}, ${config.FROM_EMAIL}`,
     subject: `[Contacto] ${contact.first_name} ${contact.last_name}`,
     html: `<p><b>Nombre:</b> ${contact.first_name} ${contact.last_name}</p>
            <p><b>Empresa:</b> ${contact.company || '-'}</p>

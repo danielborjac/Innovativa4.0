@@ -22,9 +22,10 @@ const Navbar = () => {
     {
       label: "Servicios",
       dropdown: [
-        { label: "Ingeniería Eléctrica y Electrónica", path: "/servicios/ingenieria-electrica" },
+        { label: "Ingeniería Eléctrica y Automatización industrial", path: "/servicios/ingenieria-electrica" },
         { label: "Ingeniería Industrial", path: "/servicios/ingenieria-industrial" },
         { label: "Capacitaciones y Entrenamientos", path: "/servicios/capacitaciones" },
+        { label: "Mantenimiento y Proyectos Industriales", path: "/servicios/mantenimiento" },
       ],
     },
     {

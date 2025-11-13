@@ -7,11 +7,12 @@ import "./Services.css";
 import electricImg from "../assets/electrical.jpg";
 import industrialImg from "../assets/industrial.jpg";
 import trainingImg from "../assets/training.jpg";
+import projectImg from "../assets/project.jpg";
 
 const services = [
   {
     id: 1,
-    title: "INGENIERÍA ELÉCTRICA Y ELECTRÓNICA",
+    title: "INGENIERÍA ELÉCTRICA Y AUTOMATIZACIÓN INDUSTRIAL",
     img: electricImg,
     desc: "Diseño, mantenimiento y optimización de sistemas eléctricos y electrónicos industriales. Implementamos soluciones energéticas eficientes y seguras.",
     link: "/servicios/ingenieria-electrica",
@@ -29,6 +30,13 @@ const services = [
     img: trainingImg,
     desc: "Formamos profesionales competentes con programas especializados en áreas técnicas e industriales para impulsar la innovación.",
     link: "/servicios/capacitaciones",
+  },
+  {
+    id: 4,
+    title: "MANTENIMIENTO Y PROYECTOS INDUSTRIALES",
+    img: projectImg,
+    desc: "Formamos profesionales competentes con programas especializados en áreas técnicas e industriales para impulsar la innovación.",
+    link: "/servicios/mantenimiento",
   },
 ];
 
