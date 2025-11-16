@@ -31,6 +31,10 @@
   line-height: 1.6;
 }
 
+.footer-section li:hover, .footer-section li p:hover{
+  color: var(--secondary-color);
+}
+
 .footer-section ul {
   list-style: none;
   padding: 0;

@@ -16,22 +16,23 @@ const Footer = () => {
         <div className="footer-section">
           <h4>Servicios</h4>
           <ul>
-            <li>Ingeniería y Automatización</li>
-            <li>Mantenimiento y Eficiencia Operativa</li>
-            <li>Análisis y Mejora de Procesos</li>
-            <li>Entrenamiento Técnico</li>
+            <li><a href="/servicios/ingenieria-electrica">Ingeniería Eléctrica y Automatización industrial</a></li>
+            <li><a href="/servicios/ingenieria-industrial">Ingeniería Industrial</a></li>
+            <li><a href="/servicios/capacitaciones">Capacitaciones y Entrenamientos</a></li>
+            <li><a href="/servicios/mantenimiento">Mantenimiento y Proyectos Industriales</a></li>
           </ul>
         </div>
 
         <div className="footer-section contact">
           <h4>Contáctanos</h4>
-          <p><FaMapMarkerAlt /> Quito, Ecuador</p>
-          <p><FaPhoneAlt /> +593 988 475 968</p>
-          <p><FaEnvelope /> ingenieria@innovativa40.com</p>
-
+          <ul>
+            <li><a href="https://maps.app.goo.gl/cBrmxfoZf5FQ79KS6" target="_blank"><p><FaMapMarkerAlt /> 2VP4+QV6, Chile, Cayambe - Ecuador</p></a></li>
+            <li><a href="https://wa.me/593988475968" target="_blank"><p><FaPhoneAlt /> +593 988 475 968</p></a></li>
+            <li><a href="mailto:ingenieria@innovativa40.com"><p><FaEnvelope /> ingenieria@innovativa40.com</p></a></li>
+          </ul>
           <div className="social-icons">
-            <a href="https://www.facebook.com/innovativa4.0/?locale=es_LA"><FaFacebookF /></a>
-            <a href="https://www.linkedin.com/company/innovativa-4-0/?originalSubdomain=ec"><FaLinkedinIn /></a>
+            <a href="https://www.facebook.com/innovativa4.0/?locale=es_LA" target="_blank"><FaFacebookF /></a>
+            <a href="https://www.linkedin.com/company/innovativa-4-0/?originalSubdomain=ec" target="_blank"><FaLinkedinIn /></a>
             {/*<a href="#"><FaInstagram /></a>*/}
           </div>
         </div>

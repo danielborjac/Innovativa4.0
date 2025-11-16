@@ -55,7 +55,16 @@
   gap: 0.8rem;
   margin-bottom: 1rem;
   font-size: 1rem;
+  transition: transform 0.2s 
+  ease, color 0.3s 
+  ease;
 }
+
+.info-data:hover {
+  transform: scale(1.02);
+  color: var(--secondary-color);
+}
+
 .info-item {
   align-items: center;
   gap: 0.8rem;

@@ -107,9 +107,9 @@ const Contact = () => {
                         </div>
                     </motion.div>
                     <motion.div {...useFadeInDown()}>
-                        <div className="info-data"><FaPhoneAlt /> <p>+593 988 475 968</p></div>
-                        <div className="info-data"><FaEnvelope /> <p>ingenieria@innovativa40.com</p></div>
-                        <div className="info-data"><FaMapMarkerAlt /> <p>2VP4+QV6, Chile, Cayambe - Ecuador</p></div>
+                        <div className="info-data"><FaPhoneAlt /><a href="https://wa.me/593988475968" target="_blank"><p>+593 988 475 968</p></a></div>
+                        <div className="info-data"><FaEnvelope /><a href="mailto:ingenieria@innovativa40.com"><p>ingenieria@innovativa40.com</p></a></div>
+                        <div className="info-data"><FaMapMarkerAlt /><a href="https://maps.app.goo.gl/cBrmxfoZf5FQ79KS6" target="_blank"><p>2VP4+QV6, Chile, Cayambe - Ecuador</p></a></div>
                          <div className="redes">
                             <a href="https://www.facebook.com/innovativa4.0/?locale=es_LA"><FaFacebook/></a>
                             <a href="https://www.linkedin.com/company/innovativa-4-0/?originalSubdomain=ec"><FaLinkedin href="https://www.facebook.com/innovativa4.0/?locale=es_LA"/></a>

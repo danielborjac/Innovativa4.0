@@ -35,7 +35,7 @@ const services = [
     id: 4,
     title: "MANTENIMIENTO Y PROYECTOS INDUSTRIALES",
     img: projectImg,
-    desc: "Formamos profesionales competentes con programas especializados en áreas técnicas e industriales para impulsar la innovación.",
+    desc: "Desarrollamos y ejecutamos proyectos industriales integrales, acompañados de planes de mantenimiento preventivo y correctivo que garantizan la continuidad operativa, la seguridad y la eficiencia de los sistemas productivos.",
     link: "/servicios/mantenimiento",
   },
 ];
