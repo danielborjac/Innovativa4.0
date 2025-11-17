@@ -23,6 +23,7 @@ export default function UsersPage() {
     role: "editor",
     is_active: true,
   });
+  const [errorMessage, setErrorMessage] = useState(""); 
 
   const navigate = useNavigate();
 
@@ -38,12 +39,15 @@ export default function UsersPage() {
   const loadUsers = async (page = 1) => {
     try {
       let data = "";
-      if (filters.is_active) data = await getUsers(page, 10, filters.role, filters.is_active);    
+      if (filters.is_active) data = await getUsers(page, 10, filters.role, filters.is_active);
       else data = await getUsers(page, 10, filters.role);
       setUsers(data.users);
       setPagination(data.pagination);
+      // Limpiar el mensaje de error al cargar usuarios si es necesario
+      setErrorMessage(""); 
     } catch (err) {
       console.error("Error cargando usuarios:", err);
+      // Opcional: mostrar un error de carga si es necesario
     }
   };
 
@@ -53,10 +57,13 @@ export default function UsersPage() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Limpiar el mensaje de error al empezar a escribir
+    setErrorMessage(""); 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Limpiar cualquier error previo
     try {
       if (editingUser) {
         await updateUser(editingUser.id, formData);
@@ -75,7 +82,13 @@ export default function UsersPage() {
       });
       loadUsers();
     } catch (err) {
-      console.error("Error guardando usuario:", err);
+      let message = err.response?.data?.message;
+      if (message === undefined) 
+        message = "la contraseña debe cumplir estos criterios: Mayor a 8 caracteres, una mayúscula, una minúscula y nun caracter especial (!,@,?, etc)";
+      
+      console.error("Error al guardar usuario:", message);
+      // 2. Almacenar el mensaje de error
+      setErrorMessage(message); 
     }
   };
 
@@ -96,12 +109,21 @@ export default function UsersPage() {
       role: "editor",
       is_active: true,
     });
+    // Limpiar el mensaje de error al abrir para crear
+    setErrorMessage(""); 
     setShowModal(true);
+  }
 
+  // Función para manejar el cierre del modal y limpiar estados
+  const closeModal = () => {
+    setShowModal(false);
+    setEditingUser(null);
+    setErrorMessage(""); // Limpiar el mensaje de error al cerrar
   }
 
   return (
     <div className="users-page">
+      {/* ... (resto del código del componente) ... */}
       <div className="header-users">
         <h2>Gestión de Usuarios</h2>
         <button onClick={() => NewUser()}>+ Nuevo Usuario</button>
@@ -150,7 +172,7 @@ export default function UsersPage() {
                 <td>
                   {u.role != "admin" && (
                     <>
-                      <button style={{cursor: "pointer"}} onClick={() => { setEditingUser(u); setFormData(u); setShowModal(true); }}>
+                      <button style={{cursor: "pointer"}} onClick={() => { setEditingUser(u); setFormData(u); setErrorMessage(""); setShowModal(true); }}>
                         ✏️
                       </button>
                       <button style={{cursor: "pointer"}} onClick={() => handleDelete(u.id)}>🗑️</button>
@@ -214,10 +236,10 @@ export default function UsersPage() {
                   required
                 />
               )}
-              {/*<select name="role" value={formData.role} onChange={handleChange}>
+              {/* <select name="role" value={formData.role} onChange={handleChange}>
                 <option value="editor">Editor</option>
                 <option value="admin">Admin</option>
-              </select>*/}
+              </select> */}
               <select
                 name="is_active"
                 value={formData.is_active}
@@ -232,9 +254,16 @@ export default function UsersPage() {
                 <option value="false">Inactivo</option>
               </select>
 
+              {/* 3. Mostrar el mensaje de error */}
+              {errorMessage && (
+                <p style={{ color: "red", marginTop: "10px", textAlign: "center", fontWeight: "bold" }}>
+                  {errorMessage}
+                </p>
+              )}
+              
               <div className="modal-actions">
                 <button type="submit">Guardar</button>
-                <button type="button" onClick={() => setShowModal(false)}>
+                <button type="button" onClick={closeModal}>
                   Cancelar
                 </button>
               </div>

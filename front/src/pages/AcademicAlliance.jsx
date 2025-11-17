@@ -51,8 +51,19 @@ const AcademicAlliance = () => {
     const [loading, setLoading] = useState(true);
     setTimeout(() => setLoading(false), 200);
 
+    React.useEffect(() => {
+        if (Alliance) {
+            document.title = Alliance.title + " | Innovativa 4.0";
+        }
+    }, [AllianceId, Alliance]);
+
   return (
     <>
+        <meta
+            name="description"
+            content={Alliance.universityInfo}
+        />
+        <link rel="canonical" href={`https://innovativa40.com/alianzas/${AllianceId}`}/>
         {loading && <Spinner />}
         <main className="alliance-page">
         

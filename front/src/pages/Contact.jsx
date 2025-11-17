@@ -85,6 +85,12 @@ const Contact = () => {
 
   return (
     <>
+        <title>Contáctanos | Innovativa 4.0</title>
+        <meta
+            name="description"
+            content="Soluciones industriales, automatización, ingeniería eléctrica y proyectos especializados."
+        />
+        <link rel="canonical" href="https://innovativa40.com/proyectos" />
         {loading && <Spinner />}
 
         <section className="banner">

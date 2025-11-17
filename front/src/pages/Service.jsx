@@ -32,7 +32,7 @@ import Spinner from "../components/Spinner";
 
 const servicesContent = {
   "ingenieria-electrica": {
-    title: "INGENIERÍA ELÉCTRICA Y AUTOMATIZACIÓN INDUSTRIAL",
+    title: "Igeniería Eléctrica Y Automatización Industrial",
     bannerImg: electricImg,
     sections: [
       {
@@ -83,7 +83,7 @@ const servicesContent = {
     ],
   },
   "ingenieria-industrial": {
-    title: "INGENIERÍA INDUSTRIAL",
+    title: "Ingenieria Industrial",
     bannerImg: industrialImg,
     sections: [
       {
@@ -118,7 +118,7 @@ const servicesContent = {
     ],
   },
   "capacitaciones": {
-    title: "CAPACITACIONES Y ENTRENAMIENTOS",
+    title: "Capacitaciones Y Entrenamientos",
     bannerImg: trainingImg,
     sections: [
       {
@@ -146,7 +146,7 @@ const servicesContent = {
     ],
   },
   "mantenimiento": {
-    title: "MANTENIMIENTO Y PROYECTOS INDUSTRIALES",
+    title: "Mantenimiento y Proyectos Industriales",
     bannerImg: projectImg,
     sections: [
       {
@@ -182,6 +182,12 @@ const Service = () => {
 
   const animationRef = useRef(null); 
   const isInView = useInView(animationRef, { once: true, amount: 0.25 });
+
+  useEffect(() => {
+    if (service) {
+      document.title = service.title + " | Innovativa 4.0";
+    }
+  }, [serviceId, service]);
 
   useEffect(() => {
         setLoading(true);
@@ -285,6 +291,11 @@ const Service = () => {
 
   return (
     <>
+      <meta
+            name="description"
+            content="Soluciones industriales, automatización, ingeniería eléctrica y proyectos especializados."
+        />
+        <link rel="canonical" href={`https://innovativa40.com/alianzas/${serviceId}`}/>
         {loading && <Spinner />}
       <div className="service-page" key={serviceId}>
 
@@ -292,7 +303,7 @@ const Service = () => {
           <img src={service.bannerImg} alt={service.title} />
           <Banner/>
           <div className="banner-content">
-              <motion.h1 {...hover3D} className="banner-title">{service.title}</motion.h1>
+              <motion.h1 {...hover3D} className="banner-title">{service.title.toUpperCase()}</motion.h1>
           </div>
         </section>
 

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { getProjects } from "../api/projects";
+import { Helmet } from "react-helmet-async";
 
 import "./Projects.css";
 import cil from "../assets/projects/proyecto-lactea.jpg";
@@ -105,6 +106,12 @@ const Projects = () => {
 
   return (
     <>
+      <title>Proyectos | Innovativa 4.0</title>
+      <meta
+        name="description"
+        content="Soluciones industriales, automatización, ingeniería eléctrica y proyectos especializados."
+      />
+      <link rel="canonical" href="https://innovativa40.com/proyectos" />
       {loading ? (
         <Spinner />
       ) : (

@@ -25,6 +25,12 @@ const About = () => {
 
   return (
     <>
+      <title>Nosotros | Innovativa 4.0</title>
+      <meta
+        name="description"
+        content="Nos especializamos en diseñar y ejecutar soluciones integrales para la industria, con estrictos estándares de calidad y seguridad."
+      />
+      <link rel="canonical" href="https://innovativa40.com/nosotros" />
       {loading && <Spinner />}
       <div className="about">
         {/* Banner */}

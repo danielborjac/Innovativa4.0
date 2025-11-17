@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /login
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*?*
+
+Allow: /
+
+Sitemap: https://innovativa40.com/sitemap.xml
