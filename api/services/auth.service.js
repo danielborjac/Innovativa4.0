@@ -12,7 +12,7 @@ const LOCK_TIME = Number(process.env.LOCK_TIME_SECONDS || config.LOCK_TIME_SECON
 
 async function register({ email, password, first_name, last_name, role = 'editor' }) {
   const existing = await User.findOne({ where: { email } });
-  if (existing) throw Object.assign(new Error('Email already in use'), { status: 409 });
+  if (existing) throw Object.assign(new Error('Email ya se encuentra registrado'), { status: 409 });
 
   // Evitar que cualquiera cree un admin manualmente (solo admin puede hacerlo)
   if (role === 'admin') {
