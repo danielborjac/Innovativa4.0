@@ -179,10 +179,10 @@ const Projects = () => {
                       className="modal-image"
                     />
                     <h2>{proyectoSeleccionado.titulo}</h2>
-                    <ul className="max-h-[200px] sm:max-h-[250px] overflow-y-auto mt-4 px-4 space-y-2 text-gray-700">
-                      {proyectoSeleccionado.detalles.map((item, index) => (
-                          <li key={index}>{item}</li>
-                      ))}
+                    <ul className="mt-4 px-4 space-y-2 text-gray-700">
+                        {proyectoSeleccionado.detalles.map((item, index) => (
+                            <li key={index}>{item}</li>
+                        ))}
                     </ul>
                     <p className="impacto">
                       <strong>Impacto esperado:</strong> {proyectoSeleccionado.impacto}

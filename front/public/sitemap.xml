@@ -27,13 +27,31 @@
 
   <!-- Dinámicas -->
   <url>
-    <loc>https://innovativa40.com/servicios/</loc>
+    <loc>https://innovativa40.com/ingenieria-electrica</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://innovativa40.com/alianzas/</loc>
+    <loc>https://innovativa40.com/ingenieria-industrial</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://innovativa40.com/capacitaciones</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://innovativa40.com/mantenimiento</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://innovativa40.com/alianzas/Universidad-Europea</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

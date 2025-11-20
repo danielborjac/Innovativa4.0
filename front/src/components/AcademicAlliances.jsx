@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useFadeInUp, hover3D, useSlideRotateLeft} from "../utils/motionConfig";
 import ue from "../assets/academics/ue.png";
-import ug from "../assets/academics/ug.png";
 
 const alliances = [
   {

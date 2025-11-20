@@ -24,7 +24,7 @@ const AppRoutes = () => {
       {/* Rutas públicas */}
       <Route path="/" element={<Home />} />
       <Route path="/nosotros" element={<About />} />
-      <Route path="/servicios/:serviceId" element={<Service />} />
+      <Route path="/:serviceId" element={<Service />} />
       <Route path="/alianzas/:AllianceId" element={<AcademicAlliance />} />
       <Route path="/proyectos" element={<Projects />} />
       <Route path="/contacto" element={<Contact />} />

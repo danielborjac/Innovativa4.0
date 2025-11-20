@@ -6,6 +6,7 @@ import Banner from "../components/Banner";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import "./Service.css";
+import NotFoundPage from "./NotFoundPage";
 import {
   useFadeInDown,
   useFadeInLeft,
@@ -49,6 +50,12 @@ const AcademicAlliance = () => {
   const Alliance = allianceData[AllianceId];
 
     const [loading, setLoading] = useState(true);
+
+    const fadeInDown = useFadeInDown();
+    const fadeInLeft = useFadeInLeft();
+    const fadeInRight = useFadeInRight();
+    const slideRotate = useSlideRotateLeft();
+
     setTimeout(() => setLoading(false), 200);
 
     React.useEffect(() => {
@@ -57,6 +64,9 @@ const AcademicAlliance = () => {
         }
     }, [AllianceId, Alliance]);
 
+    if (!Alliance) {
+        return <NotFoundPage />;
+    }
   return (
     <>
         <meta
@@ -77,11 +87,11 @@ const AcademicAlliance = () => {
 
             <section className="alliance-info">
                 <div className="info-image">
-                    <motion.img {...useSlideRotateLeft()} src={Alliance.infoImage} alt={Alliance.name}/>
+                    <motion.img {...slideRotate} src={Alliance.infoImage} alt={Alliance.name}/>
                 </div>
                 <div className="info-text">
-                    <motion.h2 {...useFadeInRight()}>Sobre la Universidad</motion.h2>
-                    <motion.p {...useFadeInDown()}>{Alliance.universityInfo}</motion.p>
+                    <motion.h2 {...fadeInRight}>Sobre la Universidad</motion.h2>
+                    <motion.p {...fadeInDown}>{Alliance.universityInfo}</motion.p>
                 </div>
             </section>
 
@@ -99,7 +109,7 @@ const AcademicAlliance = () => {
                             whileInView="show"
                             viewport={{ once: true, amount: 0.25 }}
                 >
-                    <motion.h5 {...useFadeInLeft()}>{Alliance.description}</motion.h5>
+                    <motion.h5 {...fadeInLeft}>{Alliance.description}</motion.h5>
                     {/*<ul>
                         {Alliance.items.map((item, index) => (
                         <li key={index}>{item}</li>
@@ -119,7 +129,7 @@ const AcademicAlliance = () => {
                             </motion.div>
                         ))}
                     </motion.div>
-                    <motion.h5 {...useFadeInLeft()}>{Alliance.conclusion}</motion.h5>
+                    <motion.h5 {...fadeInLeft}>{Alliance.conclusion}</motion.h5>
                 </motion.div>
             </section>
 

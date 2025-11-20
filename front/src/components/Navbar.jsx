@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaIndustry, FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const location = useLocation();
@@ -15,21 +15,22 @@ const Navbar = () => {
     setActiveDropdown(null);
   }, [location]);
 
-  // 🔹 Definición centralizada de los menús
   const menuItems = [
     { label: "Inicio", path: "/" },
     { label: "Nosotros", path: "/nosotros" },
     {
       label: "Servicios",
+      path: "/servicios",
       dropdown: [
-        { label: "Ingeniería Eléctrica y Automatización industrial", path: "/servicios/ingenieria-electrica" },
-        { label: "Ingeniería Industrial", path: "/servicios/ingenieria-industrial" },
-        { label: "Capacitaciones y Entrenamientos", path: "/servicios/capacitaciones" },
-        { label: "Mantenimiento y Proyectos Industriales", path: "/servicios/mantenimiento" },
+        { label: "Ingeniería Eléctrica y Automatización", path: "/ingenieria-electrica" },
+        { label: "Ingeniería Industrial", path: "/ingenieria-industrial" },
+        { label: "Capacitaciones y Entrenamientos", path: "/capacitaciones" },
+        { label: "Mantenimiento y Proyectos Industriales", path: "/mantenimiento" },
       ],
     },
     {
       label: "Alianzas Académicas",
+      path: "/alianzas",
       dropdown: [
         { label: "Universidad Europea de España", path: "/alianzas/Universidad-Europea" },
       ],
@@ -37,6 +38,14 @@ const Navbar = () => {
     { label: "Proyectos", path: "/proyectos" },
     { label: "Contacto", path: "/contacto" },
   ];
+
+  // Determina si el item está activo
+  const isItemActive = (item) => {
+    if (item.dropdown) {
+        return item.dropdown.some(sub => location.pathname === sub.path);
+    }
+    return location.pathname === item.path;
+  };
 
   const handleDropdown = (label) => {
     if (window.innerWidth <= 900) {
@@ -49,10 +58,8 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Logo */}
         <div className="navbar-logo">
-          {/*<FaIndustry className="navbar-icon" />*/}
           <Link to="/">
-            <img src={logo}/>
-            {/*<h1>INNOVATIVA 4.0</h1>*/}
+            <img src={logo} alt="Logo" />
           </Link>
         </div>
 
@@ -67,7 +74,7 @@ const Navbar = () => {
             item.dropdown ? (
               <div
                 key={item.label}
-                className={`nav-item dropdown ${activeDropdown === item.label ? "active" : ""}`}
+                className={`nav-item dropdown ${activeDropdown === item.label ? "active" : ""} ${isItemActive(item) ? "active" : ""}`}
                 onMouseEnter={() =>
                   window.innerWidth > 900 && setActiveDropdown(item.label)
                 }
@@ -90,7 +97,11 @@ const Navbar = () => {
                 </div>
               </div>
             ) : (
-              <Link key={item.path} to={item.path} className="nav-item">
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`nav-item ${isItemActive(item) ? "active" : ""}`}
+              >
                 {item.label}
               </Link>
             )

@@ -151,41 +151,47 @@ export default function UsersPage() {
         </select>
       </div>
 
-      <table className="users-table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Rol</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users?.length > 0 ? (
-            users.map((u) => (
-              <tr key={u.id}>
-                <td>{u.first_name} {u.last_name}</td>
-                <td>{u.email}</td>
-                <td>{u.role}</td>
-                <td>{u.is_active ? "Activo" : "Inactivo"}</td>
-                <td>
-                  {u.role != "admin" && (
-                    <>
-                      <button style={{cursor: "pointer"}} onClick={() => { setEditingUser(u); setFormData(u); setErrorMessage(""); setShowModal(true); }}>
-                        ✏️
-                      </button>
-                      <button style={{cursor: "pointer"}} onClick={() => handleDelete(u.id)}>🗑️</button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr><td colSpan="5">No hay usuarios disponibles</td></tr>
-          )}
-        </tbody>
-      </table>
+      <div className="table-responsive-user">
+        <table className="users-table">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {users?.length > 0 ? (
+                users.map((u) => (
+                <tr key={u.id}>
+                    <td>{u.first_name} {u.last_name}</td>
+                    <td>{u.email}</td>
+                    <td>{u.role}</td>
+                    <td>
+                        <span className={`status-badge ${u.is_active ? "active" : "inactive"}`}>
+                            {u.is_active ? "Activo" : "Inactivo"}
+                        </span>
+                    </td>
+                    <td>
+                    {u.role != "admin" && (
+                        <div className="action-buttons">
+                        <button className="btn-icon edit" onClick={() => { setEditingUser(u); setFormData(u); setErrorMessage(""); setShowModal(true); }}>
+                            ✏️
+                        </button>
+                        <button className="btn-icon delete" onClick={() => handleDelete(u.id)}>🗑️</button>
+                        </div>
+                    )}
+                    </td>
+                </tr>
+                ))
+            ) : (
+                <tr><td colSpan="5">No hay usuarios disponibles</td></tr>
+            )}
+            </tbody>
+        </table>
+      </div>
 
       <div className="pagination">
         {pagination.page > 1 && (

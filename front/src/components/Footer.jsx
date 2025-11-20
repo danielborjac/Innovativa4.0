@@ -16,10 +16,10 @@ const Footer = () => {
         <div className="footer-section">
           <h4>Servicios</h4>
           <ul>
-            <li><a href="/servicios/ingenieria-electrica">Ingeniería Eléctrica y Automatización industrial</a></li>
-            <li><a href="/servicios/ingenieria-industrial">Ingeniería Industrial</a></li>
-            <li><a href="/servicios/capacitaciones">Capacitaciones y Entrenamientos</a></li>
-            <li><a href="/servicios/mantenimiento">Mantenimiento y Proyectos Industriales</a></li>
+            <li><a href="/ingenieria-electrica">Ingeniería Eléctrica y Automatización industrial</a></li>
+            <li><a href="/ingenieria-industrial">Ingeniería Industrial</a></li>
+            <li><a href="/capacitaciones">Capacitaciones y Entrenamientos</a></li>
+            <li><a href="/mantenimiento">Mantenimiento y Proyectos Industriales</a></li>
           </ul>
         </div>
 

@@ -148,10 +148,13 @@
 
 .preview-image img {
   margin-top: 0.5rem;
-  width: 200px;
-  height: auto;
+  width: 100%;
+  max-width: 300px;
+  height: 200px; 
+  object-fit: contain; 
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: #f0f0f0; 
 }
 
 /* ===== MODAL ===== */
@@ -175,6 +178,10 @@
   border-radius: 10px;
   width: 100%;
   max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto; 
+  display: flex;    
+  flex-direction: column;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.25s ease-in-out;
   position: relative;
@@ -206,6 +213,40 @@
   background-color: #b3b3b3;
 }
 
+.uploading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #0051a1;
+  font-weight: 500;
+}
+
+/* Spinner pequeño CSS puro */
+.spinner-mini {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #0051a1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-save:disabled,
+.btn-cancel:disabled,
+input[type="file"]:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -214,4 +255,14 @@
 @keyframes slideIn {
   from { transform: translateY(-20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-height: 800px) {
+  .modal-project-content {
+    padding: 1.5rem; /* Reducir padding para ganar espacio */
+  }
+  .project-form {
+    padding: 1rem; /* Reducir padding interno */
+    margin-bottom: 1rem;
+  }
 }

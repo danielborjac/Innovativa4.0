@@ -15,28 +15,28 @@ const services = [
     title: "INGENIERÍA ELÉCTRICA Y AUTOMATIZACIÓN INDUSTRIAL",
     img: electricImg,
     desc: "Diseño, mantenimiento y optimización de sistemas eléctricos y electrónicos industriales. Implementamos soluciones energéticas eficientes y seguras.",
-    link: "/servicios/ingenieria-electrica",
+    link: "/ingenieria-electrica",
   },
   {
     id: 2,
     title: "INGENIERÍA INDUSTRIAL",
     img: industrialImg,
     desc: "Mejoramos la eficiencia de procesos industriales mediante análisis técnico, automatización y estrategias de optimización de recursos.",
-    link: "/servicios/ingenieria-industrial",
+    link: "/ingenieria-industrial",
   },
   {
     id: 3,
     title: "CAPACITACIONES Y ENTRENAMIENTOS",
     img: trainingImg,
     desc: "Formamos profesionales competentes con programas especializados en áreas técnicas e industriales para impulsar la innovación.",
-    link: "/servicios/capacitaciones",
+    link: "/capacitaciones",
   },
   {
     id: 4,
     title: "MANTENIMIENTO Y PROYECTOS INDUSTRIALES",
     img: projectImg,
     desc: "Desarrollamos y ejecutamos proyectos industriales integrales, acompañados de planes de mantenimiento preventivo y correctivo que garantizan la continuidad operativa, la seguridad y la eficiencia de los sistemas productivos.",
-    link: "/servicios/mantenimiento",
+    link: "/mantenimiento",
   },
 ];
 

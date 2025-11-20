@@ -16,6 +16,13 @@
   gap: 1rem;
   align-items: center;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap; /* Para móviles */
+}
+
+.filter-group, .filter-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .contact-filter label {
@@ -42,13 +49,19 @@
   background: #003d82;
 }
 
+/* ✅ AÑADIDO: Contenedor para scroll horizontal */
+.table-responsive-contact {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
 .contact-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  min-width: 800px; /* ✅ Fuerza el ancho mínimo para que aparezca el scroll en móviles */
 }
 
 .contact-table th,
@@ -61,6 +74,7 @@
 .contact-table th {
   background: #f0f2f5;
   font-weight: 600;
+  white-space: nowrap; /* Evita que los títulos se rompan */
 }
 
 .contact-table tr:hover {
@@ -102,6 +116,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
+  padding: 1rem;
 }
 
 .modal-contact-content {
@@ -109,8 +125,10 @@
   padding: 2rem;
   border-radius: 12px;
   max-width: 600px;
-  width: 90%;
+  width: 100%;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-contact-content h3 {
@@ -128,6 +146,7 @@
   border-radius: 6px;
   padding: 0.6rem 1rem;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .loading,

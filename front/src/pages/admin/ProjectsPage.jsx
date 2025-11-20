@@ -22,6 +22,7 @@ const ProjectsPage = () => {
   const [loadingProjects, setLoadingProjects] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState("");
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const fetchProjects = async () => {
     try {
@@ -157,22 +158,37 @@ const ProjectsPage = () => {
                 <input
                   type="file"
                   accept="image/*"
+                  disabled={uploadingImage} /* ✅ Bloquea el input mientras sube */
                   onChange={async (e) => {
                     const file = e.target.files[0];
                     if (!file) return;
+                    
+                    // 1. Activamos el bloqueo
+                    setUploadingImage(true);                    
+
                     try {
-                      setMessage("Subiendo imagen...");
                       const { uploadImageToCloudinary } = await import("../../utils/uploadImageToCloudinary");
                       const imageUrl = await uploadImageToCloudinary(file);
+                      
                       setFormData((prev) => ({ ...prev, imagen: imageUrl }));
-                      setMessage("Imagen subida correctamente ✅");
                     } catch (err) {
                       console.error(err);
                       setMessage("Error al subir la imagen ❌");
+                    } finally {
+                      // 2. Desactivamos el bloqueo (sea éxito o error)
+                      setUploadingImage(false);
                     }
                   }}
                 />
               </label>
+
+              {/* ✅ Agregamos un indicador visual pequeño debajo del input */}
+              {uploadingImage && (
+                  <div className="uploading-indicator">
+                      <div className="spinner-mini"></div>
+                      <span>Subiendo imagen...</span>
+                  </div>
+              )}
 
               {formData.imagen && (
                 <div className="preview-image">
@@ -196,11 +212,18 @@ const ProjectsPage = () => {
               />
 
               <div className="modal-buttons">
-                <button type="button" className="btn-cancel" onClick={() => setShowForm(false)}>
+                <button type="button" className="btn-cancel" onClick={() => setShowForm(false)} disabled={uploadingImage || loading}> 
                   Cancelar
                 </button>
-                <button type="submit" className="btn-save" disabled={loading}>
-                  {loading ? "Guardando..." : editingProject ? "Actualizar" : "Crear"}
+
+                <button type="submit" className="btn-save" disabled={loading || uploadingImage}>
+                  {/* Texto dinámico */}
+                  {uploadingImage 
+                    ? "Subiendo imagen..." 
+                    : loading 
+                      ? "Guardando..." 
+                      : editingProject ? "Actualizar" : "Crear"
+                  }
                 </button>
               </div>
             </form>

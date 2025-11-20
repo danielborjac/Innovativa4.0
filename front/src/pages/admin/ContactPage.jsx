@@ -63,40 +63,42 @@ const ContactPage = () => {
       ) : contacts.length === 0 ? (
         <p className="no-results">No hay contactos disponibles</p>
       ) : (
-        <table className="contact-table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Empresa</th>
-              <th>Email</th>
-              <th>Teléfono</th>
-              <th>Fecha</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contacts.map((c) => (
-              <tr key={c.id} onClick={() => setSelectedContact(c)}>
-                <td>{`${c.first_name} ${c.last_name}`}</td>
-                <td>{c.company || "-"}</td>
-                <td>{c.email}</td>
-                <td>{c.phone}</td>
-                <td>{new Date(c.createdAt).toLocaleDateString()}</td>
-                <td>
-                    <button
-                        className="reply-button"
-                        onClick={(e) => {
-                        e.stopPropagation();
-                        window.location.href = `mailto:${c.email}?subject=Respuesta a tu mensaje&body=Hola ${c.first_name},%0A%0AGracias por contactarte con Innovativa 4.0.%0A%0AAtentamente,%0ASoporte Innovativa 4.0`;
-                        }}
-                    >
-                        Responder
-                    </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="table-responsive-contact">
+          <table className="contact-table">
+            <thead>
+                <tr>
+                <th>Nombre</th>
+                <th>Empresa</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {contacts.map((c) => (
+                <tr key={c.id} onClick={() => setSelectedContact(c)}>
+                    <td>{`${c.first_name} ${c.last_name}`}</td>
+                    <td>{c.company || "-"}</td>
+                    <td>{c.email}</td>
+                    <td>{c.phone}</td>
+                    <td>{new Date(c.createdAt).toLocaleDateString()}</td>
+                    <td>
+                        <button
+                            className="reply-button"
+                            onClick={(e) => {
+                            e.stopPropagation();
+                            window.location.href = `mailto:${c.email}?subject=Respuesta a tu mensaje&body=Hola ${c.first_name},%0A%0AGracias por contactarte con Innovativa 4.0.%0A%0AAtentamente,%0ASoporte Innovativa 4.0`;
+                            }}
+                        >
+                            Responder
+                        </button>
+                    </td>
+                </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       <div className="pagination">

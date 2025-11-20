@@ -66,12 +66,12 @@
 /* Modal */
 /* === Modal Mejorado (Tailwind + custom) === */
 .modal-overlay {
-  @apply fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[999];
+  @apply fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[999] p-4;
   animation: fadeIn 0.3s ease forwards;
 }
 
 .modal-content {
-  @apply bg-white dark:bg-gray-900 rounded-2xl p-8 w-[90%] max-w-3xl text-left shadow-2xl relative transition-transform duration-300;
+  @apply bg-white dark:bg-gray-900 rounded-2xl p-8 w-full max-w-3xl text-left shadow-2xl relative transition-transform duration-300 max-h-[90vh] overflow-y-auto;
   animation: slideUp 0.4s ease forwards;
 }
 
@@ -81,7 +81,7 @@
 
 /* Imagen destacada */
 .modal-image {
-  @apply w-full h-[380px] object-cover rounded-xl mb-6 shadow-md;
+  @apply w-full max-h-[35vh] object-cover rounded-xl mb-6 shadow-md;
 }
 
 /* Botón cerrar */
@@ -127,6 +127,21 @@
 
 .contact-cta-section h2 {
   letter-spacing: 0.5px;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 4px;
+}
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 
 /* Animaciones */

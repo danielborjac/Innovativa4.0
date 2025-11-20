@@ -1,17 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Banner from "../components/Banner";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion"; 
 import "./Service.css";
 import {
   staggerContainer,
   fadeItem,
   hover3D,
 } from "../utils/motionConfig";
-import { useEffect } from "react";
-import { useRef} from "react";
 
 import electricImg from "../assets/electrical.jpg";
 import industrialImg from "../assets/industrial.jpg";
@@ -29,6 +26,7 @@ import mindustrial1 from "../assets/mantenimiento-industrial1.jpg";
 import mindustrial2 from "../assets/mantenimiento-industrial2.jpg";
 
 import Spinner from "../components/Spinner";
+import NotFoundPage from "./NotFoundPage";
 
 const servicesContent = {
   "ingenieria-electrica": {
@@ -180,28 +178,27 @@ const Service = () => {
   const service = servicesContent[serviceId];
   const [loading, setLoading] = useState(true);
 
-  const animationRef = useRef(null); 
-  const isInView = useInView(animationRef, { once: true, amount: 0.25 });
-
+  // Efecto para Title
   useEffect(() => {
     if (service) {
       document.title = service.title + " | Innovativa 4.0";
     }
   }, [serviceId, service]);
 
+  // Efecto de Loading (300ms fake loading)
   useEffect(() => {
-        setLoading(true);
-        const timer = setTimeout(() => setLoading(false), 300);
-        return () => clearTimeout(timer);
-    }, [serviceId]);
+      setLoading(true);
+      const timer = setTimeout(() => setLoading(false), 300);
+      return () => clearTimeout(timer);
+  }, [serviceId]);
 
+  // Efecto para sincronizar alturas de imágenes (Layout Fix)
   useEffect(() => {
-    if (window.innerWidth > 900) { // no aplica para movil
+    if (window.innerWidth > 900) { 
       let mounted = true;
       const imgs = Array.from(document.querySelectorAll(".section-img"));
 
       const syncHeights = () => {
-        // delay por RAF para asegurar reflow completo
         window.requestAnimationFrame(() => {
           const sections = document.querySelectorAll(".service-section");
           sections.forEach((sec) => {
@@ -209,17 +206,11 @@ const Service = () => {
             const imgWrapper = sec.querySelector(".section-img-wrapper");
             if (!text || !imgWrapper) return;
 
-            // altura real del contenido de texto (incluye padding/margins internos)
             const textHeight = Math.ceil(text.getBoundingClientRect().height + 32);
-
-            // mínimo para evitar wrappers demasiado pequeños
             const minH = 380;
-
-            // opcional padding visual extra
-            const paddingExtra = 0; // puedes poner 12 o 16 si quieres más separación
+            const paddingExtra = 0; 
             const desired = Math.max(textHeight + paddingExtra, minH);
 
-            // solo actualizar si cambió (evita reflows innecesarios)
             const current = parseInt(imgWrapper.style.height || 0, 10);
             if (!current || Math.abs(current - desired) > 2) {
               imgWrapper.style.height = `${desired}px`;
@@ -228,16 +219,12 @@ const Service = () => {
         });
       };
 
-      // Ejecutar inicialmente
       syncHeights();
 
-      // Ejecutar otra vez cuando *todas* las imágenes hayan cargado
       const handleAllLoaded = () => {
-        // pequeña espera adicional para garantizar layout final
         setTimeout(() => { if (mounted) syncHeights(); }, 60);
       };
 
-      // Si alguna imagen no está lista, agregamos listener; si todas ya listas, ejecutamos
       const notLoaded = imgs.filter(img => !img.complete);
       if (notLoaded.length > 0) {
         let remaining = notLoaded.length;
@@ -248,7 +235,6 @@ const Service = () => {
             if (remaining === 0) handleAllLoaded();
           };
           img.addEventListener("load", onLoad);
-          // también captura error para no colgar
           const onErr = () => {
             remaining--;
             img.removeEventListener("error", onErr);
@@ -257,16 +243,12 @@ const Service = () => {
           img.addEventListener("error", onErr);
         });
       } else {
-        // todas cargadas ya
         handleAllLoaded();
       }
 
-      // volver a calcular al cambiar tamaño
       const onResize = () => syncHeights();
       window.addEventListener("resize", onResize);
 
-      // opcional: si tu contenido puede cambiar dinámicamente (p.e. agregar items),
-      // puedes observar mutaciones en cada section-text -> recalc.
       const observers = [];
       document.querySelectorAll(".section-text").forEach(node => {
         const mo = new MutationObserver(syncHeights);
@@ -278,24 +260,26 @@ const Service = () => {
         mounted = false;
         window.removeEventListener("resize", onResize);
         observers.forEach(o => o.disconnect());
-        // quitamos listeners de imágenes por seguridad (no imprescindible aquí)
         imgs.forEach(img => {
           img.removeEventListener && img.removeEventListener("load", syncHeights);
         });
       };
     }
-  }, [service]); // recalcula cuando cambie el servicio
+  }, [service]);
 
+  if (!service) return <NotFoundPage></NotFoundPage>;
 
-  if (!service) return <p style={{ padding: "3rem" }}>Servicio no encontrado.</p>;
+  // ✅ LÓGICA CLAVE: Si está cargando, hidden. Si terminó, show.
+  // Esto no depende del scroll, solo del tiempo de carga.
+  const animationStatus = !loading ? "show" : "hidden";
 
   return (
     <>
       <meta
-            name="description"
-            content="Soluciones industriales, automatización, ingeniería eléctrica y proyectos especializados."
+          name="description"
+          content="Soluciones industriales, automatización, ingeniería eléctrica y proyectos especializados."
         />
-        <link rel="canonical" href={`https://innovativa40.com/alianzas/${serviceId}`}/>
+        <link rel="canonical" href={`https://innovativa40.com/${serviceId}`}/>
         {loading && <Spinner />}
       <div className="service-page" key={serviceId}>
 
@@ -308,19 +292,19 @@ const Service = () => {
         </section>
 
         {/* Contenido */}
-        <div className="service-main" ref={animationRef}>
+        <div className="service-main">
           {service.sections.map((sec, idx) => {
             const isMobile= window.innerWidth < 768
             const isReverse = idx % 2 !== 0;
 
-            // Render order control: if reverse, text first then image (or opposite)
             const ImageBlock = (
               <motion.div
                 className="section-img-wrapper"
                 key="img"
                 variants={staggerContainer}
-                initial={loading ? false : "hidden"}
-                animate={isInView ? "show" : "hidden"}
+                initial="hidden"
+                // ✅ APLICAMOS EL ESTADO GLOBAL
+                animate={animationStatus}
               >
                 <motion.img variants={fadeItem} src={sec.img} alt={sec.subtitle} className="section-img" />
               </motion.div>
@@ -331,8 +315,9 @@ const Service = () => {
                 className="section-text"
                 key="text"
                 variants={staggerContainer}
-                initial={loading ? false : "hidden"}
-                animate={isInView ? "show" : "hidden"}
+                initial="hidden"
+                // ✅ APLICAMOS EL ESTADO GLOBAL
+                animate={animationStatus}
               >
                 <motion.h2 variants={fadeItem}>{sec.subtitle}</motion.h2>
 

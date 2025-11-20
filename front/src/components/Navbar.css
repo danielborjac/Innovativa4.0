@@ -76,6 +76,10 @@
   transition: color 0.3s;
 }
 
+.nav-item.active::after {
+  width: 100%;
+}
+
 .nav-item::after {
   content: "";
   position: absolute;
