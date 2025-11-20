@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { getProjects } from "../api/projects";
-import { Helmet } from "react-helmet-async";
 
 import "./Projects.css";
 import cil from "../assets/projects/proyecto-lactea.jpg";
