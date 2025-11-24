@@ -3,7 +3,30 @@ const nodemailer = require('nodemailer');
 const config = require('../config');
 const logger = require('./logger');
 
+// Imports y Inicialización de Mailgun
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+
 let transporter;
+let mg; // Mailgun client
+
+// Cliente de Mailgun 
+function createMailgunClient() {
+    if (mg) return mg; // Cliente ya creado
+
+    if (!config.MAILGUN_API_KEY || !config.MAILGUN_DOMAIN) {
+        logger.error('Mailgun enabled but configuration is missing.');
+        return null;
+    }
+
+    const mailgunClient = new Mailgun(formData);
+    mg = mailgunClient.client({
+        username: 'api',
+        key: config.MAILGUN_API_KEY,
+        url: 'https://api.mailgun.net'
+    });
+    return mg;
+}
 
 // Si estás en modo desarrollo y quieres usar Ethereal, puedes crear cuenta test automáticamente.
 // Pero en general usamos las credenciales de config.SMTP.
@@ -38,8 +61,48 @@ async function createTransporter() {
   return transporter;
 }
 
+// Función de Envío con Mailgun
+async function sendMailgunMail(mailOptions) {
+    const mailgunClient = createMailgunClient();
+    if (!mailgunClient) {
+        throw new Error('Mailgun client failed to initialize.');
+    }
+    let recipients;
+    if (Array.isArray(mailOptions.to)) {
+        recipients = mailOptions.to;
+    } else {
+        // Separa por coma, mapea, elimina espacios en blanco y filtra si queda vacío
+        recipients = mailOptions.to
+                       .split(',')
+                       .map(email => email.trim())
+                       .filter(email => email.length > 0); 
+    }
+    
+    // Si aún no se encuentran destinatarios válidos, lanzamos un error claro
+    if (recipients.length === 0) {
+        throw new Error('No valid recipients found after processing "to" field.');
+    }
+    const messageData = {
+        from: `Innovativa 4.0 <${mailOptions.from}>`,
+        to: recipients, // <--- Ahora es un array de strings [email1, email2]
+        subject: mailOptions.subject,
+        html: mailOptions.html,
+    };
+    // ... el resto del código para enviar ...
+    const response = await mailgunClient.messages.create(config.MAILGUN_DOMAIN, messageData);
+    // ...
+}
+
+// Función de Envío con Nodemailer (SMTP)
+async function sendNodemailerMail(mailOptions) {
+    if (!transporter) await createTransporter();
+    const info = await transporter.sendMail(mailOptions);
+    logger.info('Email sent via Nodemailer (SMTP)', { messageId: info.messageId, to: mailOptions.to });
+    return { info };
+}
+
 // sendMailNow: envía inmediatamente (usado por el worker)
-async function sendMailNow(mailOptions) {
+/*async function sendMailNow(mailOptions) {
   if (!transporter) await createTransporter();
   const info = await transporter.sendMail(mailOptions);
   logger.info('Email sent', { messageId: info.messageId, to: mailOptions.to });
@@ -50,6 +113,16 @@ async function sendMailNow(mailOptions) {
     return { info, previewUrl };
   }
   return { info };
+}*/
+
+async function sendMailNow(mailOptions) {
+    if (config.MAILGUN_ENABLED) {
+        logger.info('sendMailNow: Using Mailgun API (Fast Mode).');
+        return sendMailgunMail(mailOptions);
+    } else {
+        logger.info('sendMailNow: Using Nodemailer (SMTP/Fallback Mode).');
+        return sendNodemailerMail(mailOptions);
+    }
 }
 
 // enqueue wrapper (opcional): añade a la cola — pero la cola ya debe existir/ser importada donde se use.

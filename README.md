@@ -92,6 +92,10 @@ SMTP_HOST=SmtpHostExample
 SMTP_PORT=465
 SMTP_USER=example@xxxx
 SMTP_PASS=xxxx
+
+MAILGUN_ENABLED=true/false
+MAILGUN_API_KEY=xxxx
+MAILGUN_DOMAIN=xxxx
 ```
 
 ---

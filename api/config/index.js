@@ -9,6 +9,10 @@ module.exports = {
   DB_USER: process.env.DB_USER,
   DB_PASS: process.env.DB_PASS || 'root',
   ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+  // --- Nueva Configuración de Mailgun ---
+  MAILGUN_ENABLED: process.env.MAILGUN_ENABLED === 'true',
+  MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
+  MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
   SMTP: {
     HOST: process.env.SMTP_HOST,
     PORT: Number(process.env.SMTP_PORT || 587),
